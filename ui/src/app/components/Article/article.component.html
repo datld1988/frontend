@@ -1,0 +1,422 @@
+<div class="bao-all-main-content">
+  <form name="formRegister" #formRegister="ngForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="main-bg-white1">
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                <div class="main-form4">
+                  <div class="tt-a">Thêm bài báo mới</div>
+                  <!-- div.tt-a -->
+
+                  <div class="item">
+                    <div class="tt">Loại bài báo</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <select name="article_type" id="article_type" [(ngModel)]="articleTypeSelected">
+                              <option *ngFor="let group of lstArticleType" [ngValue]="group">{{group.text}}</option>
+											      </select>
+                      <div class="icon-select">
+                        <img src="assets/images/icon-select.png" alt="" />
+                      </div>
+                      <!-- div.icon-select -->
+                    </div>
+                    <span style="color: red" class="help-block" *ngIf="this.articleTypeSelected.value==0 && formRegister._submitted">
+                        Hãy chọn loại bài báo</span>
+                    <!-- div.select-ric -->
+
+                  </div>
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Tiêu đề bài báo</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" name="magazine_name" [(ngModel)]="this.articleRegister.name" />
+                      <span style="color: red" class="help-block" *ngIf="this.articleRegister.name=='' && formRegister._submitted">
+                        Nhập tiêu đề bài báo</span>
+                    </div>
+
+                    <!-- div.input -->
+
+                  </div>
+                  <!-- div.item -->
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Tóm tắt</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <textarea name="summary" [(ngModel)]="this.articleRegister.summary"></textarea>
+                      <span style="color: red" class="help-block" *ngIf="this.articleRegister.summary=='' && formRegister._submitted">
+                        Nhập tóm tắt của bài báo</span>
+                    </div>
+                    <!-- div.input -->
+
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Số tác giả</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" name="number_author" [(ngModel)]="this.articleRegister.number_author" disabled/>
+                    </div>
+                    <!-- div.input -->
+
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="tt">Tác giả chính</div>
+                    <!-- div.tt -->
+                    <div class="bao-all-nhapten cus new">
+                      <div class="head">
+                        <div class="input">
+                          <input type="text" [(ngModel)]="primary_author" name="primary_author" #primaryauthorinput="ngModel"
+                            (keyup)="saveChange($event)">
+                          <div class="ab_p cus">
+                            <div class="btn-add">
+                              <img src="assets/images/icon-add1.png" alt="" (click)="iconAddPrimaryAuthor()">
+                            </div>
+                            <!-- div.btn-add -->
+                          </div>
+                        </div>
+                        <!-- div.input -->
+
+                      </div>
+                      <!-- div.head -->
+
+                      <div class="list-sl">
+                        <div class="it" *ngFor="let co of this.cochairSuggest">
+                          <div class="trai">
+                            <div class="ten">
+                              <div class="img-main-radius">
+                                <img [(src)]="co.linkAvar" alt="" />
+                              </div>
+                              <!-- div.img-main-radius -->
+                              <span name="cochairName">{{ co.fullname}} ({{ co.username }})</span>
+                              <!--<input [(ngModel)]="co.fullname[i]">-->
+                            </div>
+                            <!-- div.ten -->
+
+                          </div>
+                          <div class="phai">
+                            <div class="input">
+                              <a class="btn-add">
+                                                                <img src="assets/images/icon-add1.png" alt="{{ co.username}}" (click)="addCochair(co)" />
+                                                            </a>
+                            </div>
+                            <!-- div.input -->
+
+                          </div>
+                          <!-- div.phai -->
+
+                          <div class="clear"></div>
+                          <!-- div.clear -->
+                        </div>
+                        <!-- div.it -->
+                        <div class="tool_tip">
+                          Vui lòng ấn enter sau mỗi lần nhập tên tác giả
+                        </div>
+                      </div>
+                      <!-- div.list-sl -->
+                    </div>
+                    <!-- div.bao-all-nhapten -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="list-tacgia">
+                      <div class="tg a" *ngFor="let co of this.articleRegister.cochair" style="margin-right: 5px">
+                        <ng-container *ngIf="co.username === undefined">{{ co.fullname }}</ng-container>
+                        <ng-container *ngIf="co.username !== undefined">{{ co.fullname }} ({{ co.username }})</ng-container>
+
+                        <span (click)="removeCochair(co)">×</span>
+                      </div>
+                      <!-- div.tg -->
+                    </div>
+                    <!-- div.list-tacgia -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Tác giả phụ</div>
+                    <!-- div.tt -->
+                    <div class="bao-all-nhapten cus new">
+                      <div class="head">
+                        <div class="input">
+                          <input type="text" [(ngModel)]="vice_author" name="vice_author" #viceauthorinput="ngModel"
+                            (keyup)="saveChangeMem($event)">
+                          <div class="ab_p cus">
+                            <div class="btn-add">
+                              <img src="assets/images/icon-add1.png" alt="" (click)="iconAddViceAuthor()">
+                            </div>
+                            <!-- div.btn-add -->
+                          </div>
+                        </div>
+                        <!-- div.input -->
+
+                      </div>
+                      <!-- div.head -->
+
+                      <div class="list-sl">
+                        <div class="it" *ngFor="let co of this.memberSuggest">
+                          <div class="trai">
+                            <div class="ten">
+                              <div class="img-main-radius">
+                                <img [(src)]="co.linkAvar" alt="" />
+                              </div>
+                              <!-- div.img-main-radius -->
+                              <span name="cochairName">{{ co.fullname}} ({{ co.username }})</span>
+                              <!--<input [(ngModel)]="co.fullname[i]">-->
+                            </div>
+                            <!-- div.ten -->
+
+                          </div>
+                          <div class="phai">
+                            <div class="input">
+                              <a class="btn-add">
+                                                                <img src="assets/images/icon-add1.png" alt="{{ co.username}}" (click)="addMember(co)" />
+                                                            </a>
+                            </div>
+                            <!-- div.input -->
+
+                          </div>
+                          <!-- div.phai -->
+
+                          <div class="clear"></div>
+                          <!-- div.clear -->
+                        </div>
+                        <div class="tool_tip">
+                          Vui lòng ấn enter sau mỗi lần nhập tên tác giả
+                        </div>
+                        <!-- div.it -->
+                      </div>
+                      <!-- div.list-sl -->
+                    </div>
+                    <!-- div.bao-all-nhapten -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="list-tacgia">
+                      <div class="tg" *ngFor="let co of this.articleRegister.members" style="margin-right: 5px">
+                        <ng-container *ngIf="co.username === undefined">{{ co.fullname }}</ng-container>
+                        <ng-container *ngIf="co.username !== undefined">{{ co.fullname }} ({{ co.username }})</ng-container>
+                        <span (click)="removeMem(co)">×</span>
+                      </div>
+                      <!-- div.tg -->
+                    </div>
+                    <!-- div.list-tacgia -->
+                  </div>
+
+                  <span style="color: red" class="help-block" *ngIf="isCochair">
+                        {{ cocharMess }}</span>
+
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">ISSN</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" name="issn" [(ngModel)]="this.articleRegister.issn" />
+                      <!-- <span style="color: red" class="help-block" *ngIf="this.articleRegister.issn=='' && formRegister._submitted">
+                        Hãy nhập ISSN</span> -->
+                    </div>
+                    <!-- div.input -->
+
+                  </div>
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Tên tạp chí</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" name="magazine_name" [(ngModel)]="this.articleRegister.magazine_name" />
+                      <span style="color: red" class="help-block" *ngIf="this.articleRegister.magazine_name==='' && formRegister._submitted">
+                        Hãy nhập tên tạp chí</span>
+                    </div>
+                    <!-- div.input -->
+
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="row cus-15">
+                    <div class="col-xs-4">
+                      <div class="item">
+                        <div class="tt">Tập</div>
+                        <!-- div.tt -->
+                        <div class="input">
+                          <input type="number" name="chapter" [(ngModel)]="this.articleRegister.chapter" />
+                        </div>
+                        <!-- div.input -->
+
+                      </div>
+                      <!-- div.item -->
+
+
+                    </div>
+                    <!-- div.col-xs-4 -->
+                    <div class="col-xs-4">
+                      <div class="item">
+                        <div class="tt">Số</div>
+                        <!-- div.tt -->
+                        <div class="input">
+                          <input type="number" name="number" [(ngModel)]="this.articleRegister.number" />
+                        </div>
+                        <!-- div.input -->
+
+                      </div>
+                      <!-- div.item -->
+
+
+                    </div>
+                    <!-- div.col-xs-4 -->
+                    <div class="col-xs-4">
+                      <div class="item">
+                        <div class="tt">Trang</div>
+                        <!-- div.tt -->
+                        <div class="input">
+                          <input type="number" name="page" [(ngModel)]="this.articleRegister.page" />
+                        </div>
+                        <!-- div.input -->
+
+                      </div>
+                      <!-- div.item -->
+
+
+                    </div>
+                    <!-- <span style="color: red" class="help-block" *ngIf="(this.articleRegister.chapter===null || this.articleRegister.number===null || this.articleRegister.page===null)  && formRegister._submitted">
+                        Hãy nhập đầy đủ thông tin Tập, Số và Trang</span> -->
+                    <!-- div.col-xs-4 -->
+                  </div>
+                  <!-- div.row cus-15 -->
+                  <div class="item">
+                    <div class="tt">Năm công bố</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" name="publish_date" [(ngModel)]="this.articleRegister.publish_date" />
+                      <span style="color: red" class="help-block" *ngIf="this.articleRegister.publish_date===null && formRegister._submitted">
+                        Hãy nhập năm công bố</span>
+                    </div>
+                    <!-- div.input -->
+
+                  </div>
+                  <!-- div.item -->
+                  <div class="item" *ngIf="this.articleTypeSelected.value === 1 || this.articleTypeSelected.value === 2" >
+                    <div class="tt" name="article-point" *ngIf="this.articleTypeSelected.value === 1" >Impact Factor</div>
+                    <div class="tt" name="article-point" *ngIf="this.articleTypeSelected.value === 2" >Điểm</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" min=0 max=100 name="impact_factor" [(ngModel)]="this.articleRegister.impact_factor" />
+                      <span style="color: red" class="help-block" *ngIf="this.articleRegister.impact_factor===null && this.articleTypeSelected.value === 2 && formRegister._submitted">
+                        Hãy nhập điểm</span>
+                    </div>
+                    <!-- div.input -->
+
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Tạp chí ISI hoặc Scopus</div>
+                    <!-- div.tt -->
+                    <input type="checkbox" name="isi_scopus" value="SCI"> SCI
+                    <input type="checkbox" name="isi_scopus" value="SCIE"> SCIE
+                    <input type="checkbox" name="isi_scopus" value="SSCI"> SSCI
+                    <input type="checkbox" name="isi_scopus" value="SSCIE"> Scopus
+                    <input type="checkbox" name="isi_scopus" value="AHCI"> AHCI
+                    <!-- div.input -->
+                    <!-- <span style="color: red" class="help-block" *ngIf="this.articleRegister.isi_scopus?.length===0 && formRegister._submitted">
+                        Hãy nhập chọn</span> -->
+                  </div>
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">DOI</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" name="doi" [(ngModel)]="this.articleRegister.doi" />
+                      <!-- <span style="color: red" class="help-block" *ngIf="this.articleRegister.doi==='' && formRegister._submitted">
+                        Hãy nhập DOI</span> -->
+                    </div>
+                    <!-- div.input -->
+
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Từ khóa</div>
+                      <!-- div.tt -->
+                    </div>
+                    <div class="phai">
+                      <div class="input">
+                        <input type="text" [(ngModel)]="keyword" name="keyword" #keywordinput="ngModel" (keydown.enter)="addKeyword()">
+                        <div class="ab_p cus">
+                          <div class="btn-add">
+                            <img src="assets/images/icon-add1.png" alt="" (click)="addKeyword()">
+                          </div>
+                          <!-- div.btn-add -->
+                        </div>
+                        <div class="new" *ngIf="(this.articleRegister.keyword | json) != '[]'">
+                          <a *ngFor="let pageitem of this.articleRegister.keyword;index as ihome" href="javascript:;">{{pageitem}} <span><img (click)="this.articleRegister.keyword.splice(ihome, 1);" src="assets/images/icon-x.png" alt=""></span></a>
+                        </div>
+
+                      </div>
+                      <span style="color: red" class="help-block" *ngIf="this.articleRegister.keyword?.length===0 && formRegister._submitted">
+                        Hãy thêm từ khóa</span>
+                      <!-- div.input -->
+                    </div>
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">URL</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" name="url" [(ngModel)]="this.articleRegister.url" />
+                      <!-- <span style="color: red" class="help-block" *ngIf="this.articleRegister.url==='' && formRegister._submitted">
+                        Hãy nhập URL</span> -->
+                    </div>
+                    <!-- div.input -->
+
+                  </div>
+
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Trạng thái chia sẻ</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <select name="share_works" id="share_works" [(ngModel)]="shareWorksSelected">
+                              <option *ngFor="let group of lstShareWorks" [ngValue]="group">{{group.text}}</option>
+											      </select>
+                      <div class="icon-select">
+                        <img src="assets/images/icon-select.png" alt="" />
+                      </div>
+                      <!-- div.icon-select -->
+                    </div>
+                    <!-- div.select-ric -->
+                    <span style="color: red" class="help-block" *ngIf="this.shareWorksSelected.value==0 && formRegister._submitted">
+                        <b>Hãy chọn trạng thái chia sẻ</b></span>
+                  </div>
+                  <!-- div.item -->
+                  <div class="main-btn-aqua">
+                    <button #btsubmit7 type="submit" style="visibility:hidden"></button>
+                    <a class="btn-blue xam to" href="javascript:;">HỦY BỎ</a>
+                    <a class="btn-blue to" (click)="btsubmit7.click()" href="javascript:;">THÊM MỚI</a>
+                  </div>
+                  <!-- div.main-btn-aqua -->
+                </div>
+                <!-- div.main-form4 -->
+              </div>
+              <!-- div.col-xs-6 col-xs-offset-3 -->
+            </div>
+            <!-- div.row -->
+          </div>
+          <!-- div.main-bg-white1 -->
+        </div>
+        <!-- div.col-md-10 col-md-offset-1 -->
+      </div>
+      <!-- div.row -->
+    </div>
+    <!-- div.container -->
+  </form>
+</div>
+<!-- div.bao-all-main-content -->

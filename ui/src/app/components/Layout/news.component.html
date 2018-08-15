@@ -1,0 +1,243 @@
+<div class="bao-all-main-content" *ngIf="isLoadingPage">
+  <div class="container">
+    <div class="row cus-20">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="main-nav-breakcrumb">
+          <ul>
+            <li><a [routerLink]="['/']">Trang chủ</a></li>
+            <li>&rsaquo;</li>
+            <li><a>Tin tức</a></li>
+          </ul>
+
+        </div>
+        <!-- div.main-nav-breakcrumb -->
+
+        <div class="row cus-20">
+          <div class="col-md-8">
+
+            <!-- <div class="main-qc-cate">
+              <div class="media-left">
+                <div class="img">
+                  <img src="assets/images/img-bs.jpg" alt="" />
+                </div>
+              </div>
+
+               <div class="media-body">
+                <div class="tt-a">Đại học Y Hà Nội</div>
+                
+                <div class="des">Đạt só lượng nhiều đề tài nghiên cứu nhất 2.000 đề tài</div>
+              </div> 
+
+
+            </div> -->
+            <!-- div.main-qc-cate -->
+
+            <div class="main-list-detai-nghiencuu">
+
+              <div class="header">
+                <div class="trai">
+                  <!-- <div class="input search search-left">
+
+                    <input type="text" placeholder="Tìm kiếm....">
+                    <a href="" class="search"><img src="assets/images/icon-search.png" alt=""></a>
+
+                  </div> -->
+                  <!-- end search -->
+                </div>
+                <!-- div.trai -->
+
+
+                <div class="phai">
+                  <div class="main-sapxep">
+                    <div class="tt">Sắp xếp theo</div>
+                    <!-- div.tt -->
+                    <select name="" id="">
+													<option value="">Mới nhất</option>
+													<option value="">Xem nhiều nhất</option>
+												</select>
+                  </div>
+                  <!-- div.main-sapxep -->
+                </div>
+                <!-- div.phai -->
+
+                <div class="clear"></div>
+                <!-- div.clear -->
+
+
+
+              </div>
+              <!-- div.header -->
+
+
+              <div class="item" *ngFor="let work of this.lstAll">
+                <div class="media">
+                  <div class="media-left">
+                    <a [routerLink]="['/profile',work.author,'profile']">
+                      <div class="img-nv">
+                        <img src="assets/images/img-bs.jpg" alt="" />
+                        <div class="t"> {{ work.author_fullname }}</div>
+                        <!-- div.t -->
+                      </div>
+                    </a>
+                    <!-- div.img-nv -->
+                  </div>
+                  <!-- div.media-left -->
+
+                  <div class="media-body">
+                    <div class="row cus-15">
+
+                      <div class="col-sm-3 col-sm-push-9">
+
+                        <div class="img hot">
+                          <img src="assets/images/chungnhan.png" alt="" />
+                        </div>
+                        <!-- div.img -->
+                        <div class="quo">{{ work.statitics.view_number }} Lượt Xem</div>
+                        <!-- div.quo -->
+
+
+
+                      </div>
+                      <!-- div.col-sm-3 col-sm-pull-9 -->
+
+                      <div class="col-sm-9 col-sm-pull-3">
+                        <div class="tt-a">
+                          <a [routerLink]="['/chi-tiet-de-tai', work._id]" *ngIf="work.type == 1"> {{ work.name }}</a>
+                          <a [routerLink]="['/chi-tiet-bai-bao', work._id]" *ngIf="work.type == 2"> {{ work.name }}</a>
+                        </div>
+                        <!-- div.tt-a -->
+
+                        <div class="des">
+                          <a href="" class="cat">{{ work.type == 1 ? 'Đề tài' : 'Bài báo' }}</a>
+                          <div class="date">Tháng {{ work.created_date | date: 'MM/yyyy' }} - {{ work.author }}</div>
+                          <!-- div.date -->
+                        </div>
+                        <!-- div.des -->
+
+                        <div class="except" *ngIf="work.type == 1">
+                          {{ work.goal_completion }}
+                        </div>
+                        <div class="except" *ngIf="work.type == 2">
+                          {{ work.summary }}
+                        </div>
+                        <!-- div.except -->
+
+                        <div class="more">
+                          <a [routerLink]="['/chi-tiet-de-tai', work._id]" *ngIf="work.type == 1" class="link"> XEM NGAY</a>
+                          <a [routerLink]="['/chi-tiet-bai-bao', work._id]" *ngIf="work.type == 2" class="link"> XEM NGAY</a>
+                        </div>
+                        <!-- div.more -->
+                      </div>
+                      <!-- end col -->
+                    </div>
+                    <!-- div.row cus-15 -->
+                  </div>
+                  <!-- div.media-body -->
+                </div>
+                <!-- div.media -->
+              </div>
+              <!-- div.item -->
+
+
+              <div class="item">
+                <div class="phai-a">
+                  <div class="main-nav-page">
+                    <app-pagination [offset]="(pageAll-1)*limitAll" [limit]="limitAll" [size]="totalAll" (pageChange)="getAll($event)"></app-pagination>
+                  </div>
+                  <!-- div.main-nav-page -->
+                </div>
+                <!-- div.phai-a -->
+
+              </div>
+              <!-- div.item -->
+
+
+            </div>
+            <!-- div.main-list-detai-nghiencuu -->
+
+
+            <div class="mr-bt-20"></div>
+            <!-- div.mr-bt-20 -->
+
+          </div>
+          <!-- div.col-md-8 -->
+
+
+          <div class="col-md-4">
+
+
+            <div class="main-cate-detai">
+              <div class="content">
+                <div class="tt-a">Lĩnh vực nghiên cứu</div>
+                <!-- div.tt-a -->
+
+                <ul>
+                  <li><a style="cursor: pointer" (click)="fillterWorkResearch(1)">Y học cơ bản</a></li>
+                  <li><a style="cursor: pointer" (click)="fillterWorkResearch(2)">Y học lâm sàng</a></li>
+                  <li><a style="cursor: pointer" (click)="fillterWorkResearch(3)">Y tế công cộng</a></li>
+                </ul>
+
+
+              </div>
+              <!-- div.content -->
+
+
+            </div>
+            <!-- div.main-cate-detai -->
+            <div class="main-cate-detai">
+              <div class="content">
+                <div class="tt-a">Đề tài nghiên cứu</div>
+                <!-- div.tt-a -->
+
+                <ul>
+                  <li><a style="cursor: pointer" (click)="fillterWork(1)">Đề tài cấp nhà nước</a></li>
+                  <li><a style="cursor: pointer" (click)="fillterWork(2)">Đề tài cấp bộ & Tương đương</a></li>
+                  <li><a style="cursor: pointer" (click)="fillterWork(3)">Đề tài cấp cơ sở & Tương đương</a></li>
+                </ul>
+
+
+              </div>
+              <!-- div.content -->
+
+              <div class="content">
+                <div class="tt-a">Bài báo nghiên cứu</div>
+                <!-- div.tt-a -->
+
+                <ul>
+                  <li><a style="cursor: pointer" (click)="fillterArticle(1)">Bài báo quốc tế</a></li>
+                  <li><a style="cursor: pointer" (click)="fillterArticle(2)">Bài báo trong nước</a></li>
+                  <li><a style="cursor: pointer" (click)="fillterArticle(3)">Bài báo </a></li>
+                  <li><a style="cursor: pointer" (click)="fillterArticle(4)">Hội thảo</a></li>
+                  <li><a style="cursor: pointer" (click)="fillterArticle(5)">Luận văn/ luận án</a></li>
+                  <li><a style="cursor: pointer" (click)="fillterArticle(6)">Tổng quan</a></li>
+                  <li><a style="cursor: pointer" (click)="fillterArticle(7)">Ý kiến</a></li>
+                  <li><a style="cursor: pointer" (click)="fillterArticle(8)">Khác</a></li>
+
+                </ul>
+
+              </div>
+              <!-- div.content -->
+
+
+            </div>
+            <!-- div.main-cate-detai -->
+
+            
+
+          </div>
+          <!-- div.col-md-4 -->
+
+
+        </div>
+        <!-- div.row cus-20 -->
+      </div>
+      <!-- div.col-md-10 col-md-offset-1 -->
+
+    </div>
+    <!-- div.row cus-20 -->
+
+  </div>
+  <!-- div.container -->
+
+</div>
+<!-- div.bao-all-main-content -->

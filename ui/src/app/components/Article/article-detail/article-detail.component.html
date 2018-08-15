@@ -1,0 +1,386 @@
+<div class="bao-all-main-content" *ngIf="isLoadingPage" >
+  <div class="container">
+    <div class="row cus-20">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="main-nav-breakcrumb">
+          <ul>
+            <li><a [routerLink]="['/']">Trang chủ</a></li>
+            <li>&rsaquo;</li>
+            <li><a [routerLink]="['/dang-ky-bai-bao']">Tạo bài báo</a></li>
+          </ul>
+
+        </div>
+        <!-- div.main-nav-breakcrumb -->
+        <div class="main-bg-pd">
+          <div class="main-list-detai-nghiencuu border no-pd">
+            <div class="item">
+              <div class="row cus-15">
+                <div class="col-sm-3 col-sm-push-9">
+                  <div class="info">
+                    <div class="i">
+                      <span *ngIf="work.article_kind === 1" >Impact factor</span>
+                      <span *ngIf="work.article_kind !== 1" >Điểm tạp chí</span>
+                      <b>{{ work.impact_factor }}</b>
+                    </div>
+                    <!-- div.i -->
+                    <div class="i">
+                      <span>Lượt đọc</span>
+                      <b>{{ work.statitics.view_number }}</b>
+                    </div>
+                    <!-- div.i -->
+                  </div>
+                  <!-- div.info -->
+
+
+                </div>
+                <!-- div.col-sm-3 col-sm-pull-9 -->
+
+                <div class="col-sm-9 col-sm-pull-3">
+
+                  <div class="des cus">
+                    <a href="" class="cat">Bài báo</a>
+                    <div class="date">Tháng {{ work.created_date | date: 'MM/yyyy' }} - {{ fullname }}
+                      <ng-container><b style="background-color: red; color: white" *ngIf="this.isEdit !== undefined">{{ this.thongBaoDeTai }}</b></ng-container>
+                    </div>
+                    <!-- div.date -->
+                  </div>
+                  <!-- div.des -->
+
+
+                  <div class="tt-a to">
+                    <a href=""> {{ work.name }}</a>
+                  </div>
+                  <!-- div.tt-a -->
+
+                  <div class="list-avt">
+                    <div class="avt" *ngFor="let au of work.cochair">
+                      <a [routerLink]="['/profile',au.username,'profile']" *ngIf="au.username !== undefined">
+														<img src="assets/images/avt-nghiencuu.jpg" alt="" />
+														<span>{{ au.fullname }}</span>
+                          </a>
+                          
+                          <a style="cursor: pointer" *ngIf="au.username === undefined">
+														<img src="assets/images/avt-nghiencuu.jpg" alt="Tác giả không có trong hệ thống" />
+														<span>{{ au.fullname }}</span>
+													</a>
+                    </div>
+                    <!-- div.avt -->
+                    <div class="avt">
+                      [...]
+                    </div>
+                    <!-- div.avt -->
+
+                  </div>
+                  <!-- div.list-avt -->
+                  <!--<div class="except">
+                    Mục tiêu : {{ work. }}
+                  </div>-->
+                  <!-- div.except -->
+
+
+                </div>
+                <!-- div.col-sm-9 -->
+
+              </div>
+              <!-- div.row cus-15 -->
+
+
+
+
+            </div>
+            <!-- div.item -->
+
+
+
+          </div>
+          <!-- div.main-list-detai-nghiencuu -->
+          <ul class="nav nav-tabs cus" role="tablist">
+            <li role="presentation" class="active">
+              <a href="#baibao" aria-controls="baibao" role="tab" data-toggle="tab">Bài báo</a>
+            </li>
+            <li role="presentation" class="">
+              <a href="#diemso" aria-controls="diemso" role="tab" data-toggle="tab">Chi tiết điểm số</a>
+            </li>
+            <li role="presentation" class="">
+              <a href="#dsfile" aria-controls="dsfile" role="tab" data-toggle="tab">Danh sách file</a>
+            </li>
+
+
+          </ul>
+
+          <div class="tab-content">
+            <div class="function-3-btn cus" *ngIf="isDisableTab">
+
+              <a class="btn-blue xanh" (click)="showPopup('#addFile')" name="addFile" style="cursor: pointer">
+									   <img src="assets/images/icon-add2.png" alt="" /> Tài liệu
+									    
+									</a>
+              <div class="dropdown">
+                <a class="btn-blue xanh" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+									  	Bài báo <span class="caret"></span>
+									    
+									  </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><a (click)= "deleteArticle()" style="cursor: pointer">Xóa bài báo</a></li>
+                  <li><a (click)= "editArticle()" style="cursor: pointer">Thay đổi bài báo</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- div.function -->
+
+            <div role="tabpanel" class="tab-pane active" id="baibao">
+
+              <div class="content-tab">
+
+                <div class="main-baibao">
+
+
+                  <div class="content">
+                    <!--<div class="tt">Lorem ipsum dolor sit ame.</div>-->
+                    <!-- div.tt -->
+                    <div class="nd">
+                      {{ work.summary }}
+
+                    </div>
+                    <!-- div.nd -->
+                  </div>
+                  <!-- div.content -->
+                </div>
+                <!-- div.main-baibao -->
+              </div>
+              <!-- end content -->
+            </div>
+
+
+            <!-- end tabpanel -->
+            <div role="tabpanel" class="tab-pane" id="diemso">
+              <div class="main-table table-responsive">
+                <div class="control-table">
+
+                  <table class="table table-bordered table-custom">
+
+
+                    <tbody>
+                      <tr>
+                        <td>Điểm bài báo</td>
+
+                        <td> {{ work.all_point }} </td>
+                      </tr>
+                      <tr>
+                        <td class="table-heading" colspan="2"> Chi tiết điểm từng tác giả</td>
+
+                      </tr>
+                      <tr *ngFor="let co of work.cochair">
+                        <td>{{ co.fullname }}</td>
+
+                        <td>{{ co.point }}</td>
+                      </tr>
+                      <!-- <tr>
+                        <td class="table-heading" colspan="2"> Chi tiết tác giả phụ</td>
+
+                      </tr>
+                      <tr *ngFor="let co of work.members">
+                        <td>{{ co.fullname }}</td>
+
+                        <td>{{ co.point }}</td>
+                      </tr> -->
+
+                    </tbody>
+                  </table>
+                </div>
+
+
+              </div>
+              <!-- div.table -->
+
+              <!-- <a class="n-link bottom-link" (click)="showAddpointPopup('#addPointMember')" name="addPointMember" style="cursor: pointer">
+									   Thêm điểm Thành viên đề tài
+							</a> -->
+            </div>
+            <!-- end tabpanel -->
+
+
+            <div role="tabpanel" class="tab-pane" id="dsfile">
+
+              <div class="content-tab">
+                <div class="main-dsfile">
+                  <!-- <div class="head">
+                    <div class="input search search-left">
+
+                      <input type="text" placeholder="Tìm kiếm...." (keyup)="keyupSearchMember($event)" name="txtSearchMembers">
+                      <a href="" class="search"><img src="assets/images/icon-search.png" alt=""></a>
+
+                    </div>
+                    <div class="main-sapxep">
+                      <div class="tt">Sắp xếp theo</div>
+                      <select name="" id="">
+														<option value="">Mới nhất</option>
+														<option value="">Mới nhất</option>
+														<option value="">Mới nhất</option>
+													</select>
+                    </div>
+                  </div> -->
+
+                  <div class="content">
+                    <div class="main-table table-responsive">
+                      <table *ngIf="files?.length !== 0">
+                        <tr>
+                          <td>STT</td>
+                          <td>Ngày đăng tải</td>
+                          <td>File</td>
+                          <td class="trai-a">Ghi chú</td>
+                          <td></td>
+                        </tr>
+                        
+                        <tr *ngFor="let file of files;index as idx">
+                          <td>{{ idx + 1 }}</td>
+                          <td>{{ file.created | date: 'dd/MM/yyyy hh:MM' }}</td>
+                          <td>
+                            <a style="cursor: pointer" class="link" name="file-name" (click)="downloadFile(file._id)">{{ file.filename }}</a>
+                          </td>
+                          <td class="trai-a">
+                            <div class="nghiencuu"> {{ file.description }} </div>
+                            <!-- div.nghiencuu -->
+                          </td>
+                          <td>
+                            <a style="cursor: pointer" class="func" (click)="removeFile(file._id,idx)" *ngIf="isDisableTab">
+														<img src="assets/images/btn-close.png" alt="" />
+													</a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <!-- div.table -->
+                  </div>
+                  <!-- div.content -->
+                </div>
+                <!-- div.main-dsfile -->
+
+              </div>
+              <!-- end content -->
+
+            </div>
+            <!-- end tabpanel -->
+            <div style="float: right; cursor: pointer; margin: 10px 0px 10px 0px" *ngIf="this.isEdit" ><a class="btn-blue" (click)="requestUpdateWork()">YÊU CẦU DUYỆT BÀI BÁO</a></div>
+            <div style="float: right; cursor: pointer; margin: 10px 0px 10px 0px" *ngIf="this.isWorkPublic" ><a class="btn-blue" (click)="requestOpenWork()">YÊU CẦU CHỈNH SỬA BÀI BÁO</a></div>
+            <br>
+          </div>
+          <!-- end tab-contente -->
+
+
+        </div>
+        <!-- div.main-bg-pd -->
+
+      </div>
+      <!-- div.col-md-10 col-md-offset-1 -->
+
+    </div>
+    <!-- div.row cus-20 -->
+
+  </div>
+  <!-- div.container -->
+
+</div>
+<!-- div.bao-all-main-content -->
+
+
+<!--modal thêm điểm-->
+<div id="addPointMember" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-md">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="main-baocao">
+          <div class="trai">
+            <div class="tt">Thêm bài điểm Thành viên đề tài</div>
+            <!-- div.tt -->
+          </div>
+          <!-- div.trai -->
+          <div class="clear"></div>
+          <!-- div.clear -->
+          <div class="input search search-left">
+
+            <input type="text" placeholder="Tìm kiếm...." (keyup)="keyupSearchMember($event)">
+            <a class="search"><img src="assets/images/icon-search.png" alt="" style="cursor: pointer"></a>
+
+          </div>
+          <!-- end input-search -->
+
+        </div>
+        <!-- div.main-baocao -->
+
+        <div class="main-list-detai-nghiencuu cus" style="overflow-y: scroll; height: 255px;">
+
+          <div class="item item-2" *ngFor="let mem of memberSearch">
+            <form class="form-horizontal">
+              <div class="form-group form-group-2" name="aaaaaaa">
+                <label class="col-sm-5 control-label" name="fullname"><b>{{ mem.fullname }} </b></label>
+                <div class="col-sm-7">
+                  <input type="number" class="form-control" placeholder="Nhập số điểm" name="point">
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <!-- div.item -->
+        </div>
+        <!-- div.main-list-detai-nghiencuu -->
+
+
+        <div class="main-btn-aqua li-btn-media gpbtn-morepd">
+          <a style="cursor: pointer" class="btn-blue xam" (click)="closePopup('#addPointMember')">HỦY LỆNH</a>
+          <a style="cursor: pointer" class="btn-blue" (click)="addPointPopup('#addPointMember')">CẬP NHẬT</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- end modal-content -->
+
+  </div>
+</div>
+<!--hết model thêm điểm-->
+
+<!--model thêm tài liệu-->
+<!-- Modal -->
+<div id="addFile" class="modal fade" role="dialog">
+  <div class="modal-dialog ">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="main-taifile" style="max-width: 517px">
+          <div class="des1">Lựa chọn file tài liệu bạn muốn tải lên</div>
+          <!-- div.des1 -->
+          <div class="tt-a">Bài báo: {{ work.name }}</div>
+
+          <div class="des2">
+            Ghi chú <br>
+            <textarea cols="40" rows="3" name="comment"></textarea>
+          </div>
+
+          <!-- div.tt-a -->
+          <div class="des2">Hệ thống chấp nhận file: Word, excel, pdf, png, jpg</div>
+          <!-- div.des2 -->
+
+          <div class="custom-file-upload">
+            <!--<label for="file">File: </label>-->
+            <input type="file" id="fileUpload" (change)="changeListener($event)" name="file" />
+          </div>
+          <div class="main-btn-aqua">
+            <a style="cursor: pointer" data-dismiss="modal" class="btn-blue xam to">HỦY BỎ</a>
+            <a style="cursor: pointer" class="btn-blue to" (click)="uploadFile($event)">LƯU LẠI</a>
+          </div>
+          <!-- end main-btn-aqua -->
+        </div>
+        <!-- div.main-form2 -->
+      </div>
+
+    </div>
+    <!-- end modal-content -->
+
+  </div>
+</div>
+<!--hết model thêm tài liệu-->

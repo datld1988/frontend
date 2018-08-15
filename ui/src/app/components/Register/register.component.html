@@ -1,0 +1,1199 @@
+<div class="bao-all-main-content">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-10 col-md-offset-1" *ngIf="step==1">
+        <form novalidate name="formRegister1" #formRegister1="ngForm" (ngSubmit)="groupSelected.code!=''&&departmentSelected.code!='' && gotostep(2)"
+          (keydown.enter)="$event.preventDefault()">
+          <div class="main-bg-white1">
+            <div class="tt-welcome">
+              <ng-container *ngIf="outSys === undefined">Chào mừng bạn đã tham gia cùng chúng tôi,<br> Vui lòng điền thêm <b>thông tin về nơi công tác</b></ng-container>
+              <ng-container *ngIf="outSys">Tài khoản của bạn chưa thuộc cơ sở nào,<br> Vui lòng điền thêm <b>thông tin về nơi công tác</b></ng-container>
+            </div>
+            <!-- div.tt-welcome -->
+
+
+            <div class="main-form1">
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Cơ sở <span class="star">*</span></div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <select name="group" id="group" [(ngModel)]="groupSelected" (change)="changeGroup()">
+                      
+											   <option *ngFor="let group of lstGroup" [ngValue]="group">{{group.name}}</option>
+											</select>
+                    <div class="icon-select">
+                      <img src="assets/images/icon-select.png" alt="">
+                    </div>
+                    <div class="tool" *ngIf="(formRegister1._submitted && groupSelected.code==='' )">
+                      Chọn đúng cơ sở
+                    </div>
+                    <!-- div.tool -->
+                  </div>
+
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Khoa/Phòng/Ban<span class="star">*</span></div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <select name="department" id="department" [(ngModel)]="departmentSelected">
+											
+                          <option *ngFor="let group of lstDepartment" [ngValue]="group">{{group.name}}</option>
+											</select>
+                    <div class="icon-select">
+                      <img src="assets/images/icon-select.png" alt="">
+                    </div>
+                    <div class="tool" *ngIf="(formRegister1._submitted && departmentSelected.code==='' )">
+                      Chọn đúng Khoa/Phòng/Ban
+                    </div>
+                    <!-- div.icon-select -->
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Địa chỉ cơ quan</div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <input disabled="disabled" type="text" [(ngModel)]="groupSelected.address" name="groupaddress">
+
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Điện thoại cơ quan</div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <input disabled="disabled" type="text" [(ngModel)]="groupSelected.phone" name="groupphone">
+
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Fax</div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <input disabled="disabled" type="text" [(ngModel)]="groupSelected.fax" name="groupfax">
+
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Email</div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <input disabled="disabled" type="text" [(ngModel)]="groupSelected.email" name="groupemail">
+
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Website</div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <input disabled="disabled" type="text" [(ngModel)]="groupSelected.website" name="groupwebsite">
+
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+
+              <div class="item">
+                <div class="trai"></div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="phai-a">
+                    <button #btsubmit type="submit" style="visibility:hidden">TIẾP TỤC </button>
+                    <a class="btn-blue to" (click)="btsubmit.click()" href="javascript:;" *ngIf="!this.outSys">TIẾP TỤC </a>
+                    <a class="btn-blue to" (click)="btsubmit.click()" href="javascript:;" *ngIf="this.outSys">VÀO HỆ THỐNG </a>
+
+                  </div>
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+            </div>
+            <!-- div.main-form1 -->
+
+
+          </div>
+          <!-- div.main-bg-white1 -->
+        </form>
+      </div>
+      <!-- end form 1 -->
+
+      <div class="col-md-10 col-md-offset-1" *ngIf="step==2">
+        <form novalidate name="formRegister2" #formRegister2="ngForm" (ngSubmit)="formRegister2.valid&&academic_rankSelected.value>0 && degreeSelected.value>0  && gotostep(3)"
+          (keydown.enter)="$event.preventDefault()">
+          <div class="main-bg-white1">
+            <div class="tt-welcome">
+              Chào mừng bạn đã tham gia cùng chúng tôi. <br> Vui lòng điền thêm <b>thông tin cá nhân</b>, trường thông tin
+              có dấu * là bắt buộc
+            </div>
+            <!-- div.tt-welcome -->
+
+
+            <div class="main-form1">
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Họ <span class="star">*</span></div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <input type="text" [(ngModel)]="usermodel.family_name" name="familyname" #familyname="ngModel" myAutofocus required>
+                    <div class="tool" *ngIf="familyname?.errors?.required && formRegister2.invalid&& formRegister2._submitted">
+                      Nhập họ
+                    </div>
+                    <!-- div.tool -->
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Tên đệm <span class="star">*</span></div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <input type="text" [(ngModel)]="usermodel.middle_name" name="middlename" #middlename="ngModel" required>
+                    <div class="tool" *ngIf="middlename?.errors?.required && formRegister2.invalid&& formRegister2._submitted">
+                      Nhập tên đệm
+                    </div>
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Tên <span class="star">*</span></div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool ">
+                    <input type="text" [(ngModel)]="usermodel.first_name" name="firstname" #firstname="ngModel" required>
+                    <div class="tool" *ngIf="firstname?.errors?.required && formRegister2.invalid&& formRegister2._submitted">
+                      Nhập tên
+                    </div>
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Giới tính <span class="star">*</span></div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input">
+                    <input type="radio" name="sex" id="nam" [value]="1" [(ngModel)]="usermodel.gender">
+                    <label for="nam">Nam</label>
+                    <input type="radio" name="sex" id="nu" [value]="2" [(ngModel)]="usermodel.gender">
+                    <label for="nu">Nữ</label>
+
+
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Ngày sinh <span class="star">*</span></div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <input type="text" [ngModel]="usermodel.sbirthday" (blur)="usermodel.sbirthday = birthday.value" name="birthday" #birthday
+                      #birthdayinput="ngModel" id="birthday" required>
+                    <div class="tool" *ngIf="birthdayinput?.errors?.required && formRegister2.invalid&& formRegister2._submitted">
+                      Nhập ngày sinh
+                    </div>
+
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Học hàm <span class="star">*</span></div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <select name="academic_rank" id="academic_rank" [(ngModel)]="academic_rankSelected">
+											
+                          <option *ngFor="let group of lstacademic_rank" [ngValue]="group">{{group.text}}</option>
+											</select>
+                    <div class="icon-select">
+                      <img src="assets/images/icon-select.png" alt="">
+                    </div>
+                    <div class="tool" *ngIf="(formRegister2._submitted && academic_rankSelected.value===0 )">
+                      Chọn đúng học hàm
+                    </div>
+                    <!-- div.icon-select -->
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Học vị <span class="star">*</span></div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <select name="degree" id="degree" [(ngModel)]="degreeSelected">
+											
+                          <option *ngFor="let group of lstdegree" [ngValue]="group" >{{group.text}}</option>
+											</select>
+                    <div class="icon-select">
+                      <img src="assets/images/icon-select.png" alt="">
+                    </div>
+                    <!-- div.icon-select -->
+                    <div class="tool" *ngIf="(formRegister2._submitted && degreeSelected.value==0 )">
+                      Chọn đúng học vị
+                    </div>
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+
+
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Số điện thoại <span class="star">*</span></div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input have_tool">
+                    <input type="text" [(ngModel)]="usermodel.mobile" name="mobile" #mobile="ngModel" required pattern="[0-9]*" minlength="10"
+                      maxlength="11">
+
+
+                    <div class="tool" *ngIf="mobile?.errors?.required && formRegister2.invalid&& formRegister2._submitted">
+                      Nhập số điện thoại
+                    </div>
+                    <div class="tool" *ngIf="(mobile?.errors?.pattern||mobile?.errors?.minlength||mobile?.errors?.maxlength) && formRegister2.invalid&& formRegister2._submitted">
+                      Số điện thoại không đúng định dạng
+                    </div>
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Địa chỉ nhà</div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input">
+                    <input type="text" [(ngModel)]="usermodel.address" name="address">
+
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="trai">
+                  <div class="tt-s">Trang cá nhân</div>
+                  <!-- div.tt -->
+                </div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="input">
+                    <input type="text" [(ngModel)]="homepagemodel" name="homepagemodel" #homepageinput="ngModel" (keyup.enter)="addhomepage();">
+                    <div class="ab_p cus">
+                      <div class="btn-add">
+                        <img src="assets/images/icon-add1.png" alt="" (click)="addhomepage()">
+                      </div>
+                      <!-- div.btn-add -->
+                    </div>
+                    <div class="new" *ngIf="(usermodel.homepage | json) != '[]'">
+
+                      <a *ngFor="let pageitem of usermodel.homepage;index as ihome" href="javascript:;">{{pageitem}} <span><img (click)="usermodel.homepage.splice(ihome, 1);" src="assets/images/icon-x.png" alt=""></span></a>
+
+
+                    </div>
+
+                  </div>
+                  <!-- div.input -->
+
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+
+              <div class="item">
+                <div class="trai"></div>
+                <!-- div.trai -->
+                <div class="phai">
+                  <div class="phai-a">
+                    <button #btsubmit2 type="submit" style="visibility:hidden">TIẾP TỤC </button>
+                    <a class="btn-blue xam to" (click)="backtostep(1)" href="javascript:;">QUAY LẠI </a>
+                    <a class="btn-blue to" (click)="btsubmit2.click()" href="javascript:;">TIẾP TỤC </a>
+                  </div>
+                </div>
+                <!-- div.phai -->
+              </div>
+              <!-- div.item -->
+            </div>
+            <!-- div.main-form1 -->
+
+
+          </div>
+          <!-- div.main-bg-white1 -->
+        </form>
+      </div>
+      <!-- end form 2 -->
+      <div class="col-md-10 col-md-offset-1" *ngIf="step==3">
+        <form novalidate name="formRegister2" #formRegister3="ngForm" (ngSubmit)=" research_areaSelected.value>0 && gotostep(4)"
+          (keydown.enter)="$event.preventDefault()">
+          <div class="main-bg-white1">
+            <div class="tt-welcome">
+              Chào mừng bạn đã tham gia cùng chúng tôi. <br> Bạn có muốn điền thêm thông tin về hoạt động <b>khoa học và giảng dạy</b>              cho chúng tôi biết được ko?
+            </div>
+            <!-- div.tt-welcome -->
+
+
+            <div class="main-form2">
+              <div class="item">
+                <div class="tt-b">Lĩnh vực nghiên cứu</div>
+                <!-- div.tt-b -->
+                <div class="input have_tool">
+                  <select name="research_area" id="research_area" [(ngModel)]="research_areaSelected">
+											
+                          <option *ngFor="let group of lstresearch_area" [ngValue]="group">{{group.text}}</option>
+											</select>
+                  <div class="icon-select">
+                    <img src="assets/images/icon-select.png" alt="" />
+                  </div>
+                  <div class="tool" *ngIf="(formRegister3._submitted && research_areaSelected.value===0 )">
+                    Chọn đúng lĩnh vực nghiên cứu
+                  </div>
+                  <!-- div.icon-select -->
+                </div>
+                <!-- div.select-ric -->
+
+
+              </div>
+              <!-- div.item -->
+              <div class="item">
+                <div class="tt-b">Chủ đề nghiên cứu</div>
+                <!-- div.tt-b -->
+
+                <div class="bao-all-nhapten fixtop">
+                  <div class="head" (click)="tagfocus()">
+                    <div class="ten ten-2" *ngFor="let ritem of usermodel.research_topic;index as ir">
+
+                      <span>{{ritem}}</span>
+
+                      <a href="javascript:;" (click)="usermodel.research_topic.splice(ir, 1);" class="cl-2"></a>
+                    </div>
+                    <!-- div.ten -->
+
+                    <input type="text" [(ngModel)]="researchmmodel" id="researchmmodel" name="researchmmodel" #researchinput="ngModel" (keyup.enter)="addresearch();"
+                      (blur)="addresearch();">
+
+
+                  </div>
+                  <!-- div.head -->
+                  <div class="list-sl">
+                    <div class="tool_tip">
+                        Ấn enter sau mỗi chủ đề để ghi nhận chủ đề nghiên cứu
+                    </div>
+                  </div>
+
+                </div>
+                <!-- div.bao-all-nhapten -->
+
+              </div>
+              <!-- div.item -->
+              <!-- div.item -->
+              <div class="item">
+                <div class="tt-b">Hiệp hội khoa học tham gia</div>
+                <!-- div.tt-b -->
+                <div class="bao-all-nhapten fixtop">
+
+                  <div class="input">
+
+                    <input type="text" [(ngModel)]="scientificmodel" name="scientificmodel" #scientificinput="ngModel" (keyup.enter)="addscientific();">
+                    <!-- <div class="ab_p cus">
+                      <div class="btn-add">
+                        <img src="assets/images/icon-add1.png" alt="" (click)="addscientific()">
+                      </div>
+                    </div> -->
+                    <div class="new" *ngIf="(usermodel.scientific_association | json) != '[]'">
+
+                      <a *ngFor="let pageitem of usermodel.scientific_association;index as is" href="javascript:;">{{pageitem}} <span><img (click)="usermodel.scientific_association.splice(is, 1);" src="assets/images/icon-x.png" alt=""></span></a>
+
+
+                    </div>
+                  </div>
+                  <div class="list-sl">
+                      <div class="tool_tip">
+                          Ấn enter sau mỗi lần nhập để ghi nhận hiệp hội tham gia
+                      </div>
+                    </div>
+                </div>
+                <!-- div.input -->
+
+              </div>
+              <!-- <div class="tool_tip">
+                  Vui lòng ấn enter sau mỗi lần nhập tên tác giả
+                </div> -->
+              <!-- div.item -->
+              <div class="item">
+                <div class="tt-b">Thêm mới kinh nghiệm</div>
+                <!-- div.tt-b -->
+                <div class="main-list-kinhnghiem">
+                  <div class="item" (click)="showPopup('#researchModal')">
+                    <img src="assets/images/icon-add2.png" alt="">
+                    <span>Nghiên cứu</span>
+                  </div>
+                  <!-- div.item -->
+                  <div class="item" (click)="showPopup('#teachingModal')">
+                    <img src="assets/images/icon-add2.png" alt="">
+                    <span>Giảng dạy</span>
+                  </div>
+                  <!-- div.item -->
+                  <div class="item" (click)="showPopup('#commendationModal')">
+                    <img src="assets/images/icon-add2.png" alt="">
+                    <span>Khen thưởng</span>
+                  </div>
+                  <!-- div.item -->
+
+
+                </div>
+                <!-- div.main-list-kinhnghiem -->
+              </div>
+              <!-- div.item -->
+
+
+
+
+            </div>
+            <!-- div.main-form2 -->
+            <div class="main-form3">
+              <div class="table-main table-responsive" *ngIf="(usermodel.research_experience | json) != '[]'">
+                <div class="tt">Kinh nghiệm nghiên cứu</div>
+                <!-- div.tt -->
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Mô tả</td>
+                      <td>Thời gian</td>
+                      <td>Đơn vị</td>
+                      <td>Vai trò</td>
+                      <td>Địa chỉ</td>
+                      <td> </td>
+                    </tr>
+                    <tr *ngFor="let item of usermodel.research_experience;index as i">
+                      <td>{{item.name}}</td>
+                      <td>{{item.date_from}}-{{item.date_to}}</td>
+                      <td>{{item.work_place}}</td>
+                      <td>{{item.role}}</td>
+                      <td>{{item.address}}</td>
+                      <td><a class="fa fa-trash-o" (click)="usermodel.research_experience.splice(i, 1);" href="javascript:;"><img src="assets/images/btn-close.png" alt=""></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+              </div>
+              <div class="table-main table-responsive" *ngIf="(usermodel.teaching_experience | json) != '[]'">
+                <div class="tt">Kinh nghiệm giảng dạy</div>
+                <!-- div.tt -->
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Mô tả</td>
+                      <td>Thời gian</td>
+                      <td>Đơn vị</td>
+                      <td>Vai trò</td>
+                      <td>Địa chỉ</td>
+                      <td> </td>
+                    </tr>
+                    <tr *ngFor="let item of usermodel.teaching_experience;index as i">
+                      <td>{{item.name}}</td>
+                      <td>{{item.date_from}}-{{item.date_to}}</td>
+                      <td>{{item.work_place}}</td>
+                      <td>{{item.role}}</td>
+                      <td>{{item.address}}</td>
+                      <td><a class="fa fa-trash-o" (click)="usermodel.teaching_experience.splice(i, 1);" href="javascript:;"><img src="assets/images/btn-close.png" alt=""></a></td>
+
+                    </tr>
+                  </tbody>
+                </table>
+
+
+              </div>
+
+              <div class="table-main table-responsive" *ngIf="(usermodel.commendation_experience | json) != '[]'">
+                <div class="tt">Khen thưởng và giải thưởng</div>
+                <!-- div.tt -->
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Mô tả</td>
+                      <td>Thời gian</td>
+                      <td>Quyết định</td>
+                      <td>Cấp</td>
+                      <td>Nội dung</td>
+                      <td> </td>
+                    </tr>
+                    <tr *ngFor="let item of usermodel.commendation_experience;index as i">
+                      <td>{{item.name}}</td>
+                      <td>{{item.date}}</td>
+                      <td>{{item.decision}}</td>
+                      <td>{{item.level}}</td>
+                      <td>{{item.content}}</td>
+                      <td><a class="fa fa-trash-o" (click)="usermodel.commendation_experience.splice(i, 1);" href="javascript:;"><img src="assets/images/btn-close.png" alt=""></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+              </div>
+
+              <div style="text-align:center">
+                <button #btsubmit3 type="submit" style="visibility:hidden">TIẾP TỤC </button>
+                <a class="btn-blue xam to" (click)="backtostep(2)" href="javascript:;">QUAY LẠI </a>
+                <a href="javascript:;" class="btn-blue to" (click)="btsubmit3.click()">TIẾP TỤC</a>
+              </div>
+
+
+            </div>
+          </div>
+          <!-- div.main-bg-white1 -->
+        </form>
+        <!--End form 3-->
+
+        <!-- Modal -->
+        <div id="researchModal" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <form novalidate name="formResearch" #formResearch="ngForm" (ngSubmit)="addResearch()" (keydown.enter)="$event.preventDefault()">
+                  <div class="main-form2" style="max-width: 750px">
+                    <div class="tt-t">Kinh nghiệm nghiên cứu</div>
+                    <!-- div.tt-t -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="item-a">
+                          <div class="tt-b">Vị trí</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="researchExperienceModel.name" name="researchname" #researchname="ngModel" required/>
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+                      <div class="col-md-5">
+                        <div class="item-a">
+                          <div class="tt-b">Đơn vị</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="researchExperienceModel.work_place" name="researchworkplace" #researchworkplace="ngModel"
+                              required/>
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+
+
+                    </div>
+                    <!-- div.row -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="item-a">
+                          <div class="tt-b">Thời gian</div>
+                          <!-- div.tt-b -->
+                          <div class="row cus-4">
+                            <div class="col-sm-6">
+                              <div class="input">
+                                <input type="text" [(ngModel)]="researchExperienceModel.date_from" name="researchdatefrom" #researchdatefrom="ngModel" placeholder="Từ"
+                                  required/>
+                              </div>
+                              <!-- div.input -->
+
+                            </div>
+                            <!-- div.col-sm-6 -->
+                            <div class="col-sm-6">
+                              <div class="input">
+                                <input type="text" [(ngModel)]="researchExperienceModel.date_to" name="researchdateto" #researchdateto="ngModel" placeholder="Đến"
+                                  required/>
+                              </div>
+                              <!-- div.input -->
+
+                            </div>
+                            <!-- div.col-sm-6 -->
+
+                          </div>
+                          <!-- div.row -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+                      <div class="col-md-5">
+                        <div class="item-a">
+                          <div class="tt-b">Địa chỉ</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="researchExperienceModel.address" name="researchaddress" #researchaddress="ngModel" required/>
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+
+
+                    </div>
+                    <!-- div.row -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="item-a">
+                          <div class="tt-b">Tóm tắt vai trò</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="researchExperienceModel.role" name="researchrole" #researchrole="ngModel" required/>
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+
+
+                    </div>
+                    <!-- div.row -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="list-btn">
+                          <button #btsubmitResearch type="submit" style="visibility:hidden"> </button>
+                          <a href="javascript:;" (click)="btsubmitResearch.click()" class="btn-blue">LƯU LẠI</a>
+                          <a href="javascript:;" data-dismiss="modal" class="btn-blue xam">HỦY BỎ</a>
+                        </div>
+                        <!-- div.list-btn -->
+                      </div>
+                      <!-- div.col-md-7 -->
+                      <!-- <div class="col-md-5">
+                        <span style="color:red" *ngIf="formResearch.invalid && formResearch._submitted"> Vui lòng nhập đầy đủ thông tin</span>
+                      </div> -->
+                    </div>
+                    <!-- div.row -->
+
+                  </div>
+                </form>
+                <!-- div.main-form2 -->
+              </div>
+
+            </div>
+            <!-- end modal-content -->
+
+          </div>
+        </div>
+        <!-- end modal -->
+
+        <!-- Modal -->
+        <div id="teachingModal" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <form novalidate name="formTeaching" #formTeaching="ngForm" (ngSubmit)="addTeaching()" (keydown.enter)="$event.preventDefault()">
+                  <div class="main-form2" style="max-width: 750px">
+                    <div class="tt-t">Kinh nghiệm giảng dạy</div>
+                    <!-- div.tt-t -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="item-a">
+                          <div class="tt-b">Vị trí</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="teachingExperienceModel.name" name="teachingname" #teachingname="ngModel" required/>
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+                      <div class="col-md-5">
+                        <div class="item-a">
+                          <div class="tt-b">Đơn vị</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="teachingExperienceModel.work_place" name="teachingworkplace" #teachingworkplace="ngModel"
+                              required/>
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+
+
+                    </div>
+                    <!-- div.row -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="item-a">
+                          <div class="tt-b">Thời gian</div>
+                          <!-- div.tt-b -->
+                          <div class="row cus-4">
+                            <div class="col-sm-6">
+                              <div class="input">
+                                <input type="text" [(ngModel)]="teachingExperienceModel.date_from" name="teachingdatefrom" #teachingdatefrom="ngModel" placeholder="Từ"
+                                  required/>
+                              </div>
+                              <!-- div.input -->
+
+                            </div>
+                            <!-- div.col-sm-6 -->
+                            <div class="col-sm-6">
+                              <div class="input">
+                                <input type="text" [(ngModel)]="teachingExperienceModel.date_to" name="teachingdateto" #teachingdateto="ngModel" placeholder="Đến"
+                                  required/>
+                              </div>
+                              <!-- div.input -->
+
+                            </div>
+                            <!-- div.col-sm-6 -->
+
+                          </div>
+                          <!-- div.row -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+                      <div class="col-md-5">
+                        <div class="item-a">
+                          <div class="tt-b">Địa chỉ</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="teachingExperienceModel.address" name="teachingaddress" #teachingaddress="ngModel" required/>
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+
+
+                    </div>
+                    <!-- div.row -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="item-a">
+                          <div class="tt-b">Tóm tắt vai trò</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="teachingExperienceModel.role" name="teachingrole" #teachingrole="ngModel" required/>
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+
+
+                    </div>
+                    <!-- div.row -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="list-btn">
+                          <button #btsubmitTeaching type="submit" style="visibility:hidden"> </button>
+                          <a href="javascript:;" (click)="btsubmitTeaching.click()" class="btn-blue">LƯU LẠI</a>
+                          <a href="javascript:;" data-dismiss="modal" class="btn-blue xam">HỦY BỎ</a>
+                        </div>
+                        <!-- div.list-btn -->
+                      </div>
+                      <!-- div.col-md-7 -->
+                      <div class="col-md-5">
+                        <span style="color:red" *ngIf="formTeaching.invalid && formTeaching._submitted"> Vui lòng nhập đầy đủ thông tin</span>
+                      </div>
+                    </div>
+                    <!-- div.row -->
+
+                  </div>
+                </form>
+                <!-- div.main-form2 -->
+              </div>
+
+            </div>
+            <!-- end modal-content -->
+
+          </div>
+        </div>
+        <!-- end modal -->
+        <!-- Modal -->
+        <div id="commendationModal" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <form novalidate name="formCommendation" #formCommendation="ngForm" (ngSubmit)="addCommendation()" (keydown.enter)="$event.preventDefault()">
+                  <div class="main-form2" style="max-width: 750px">
+                    <div class="tt-t">Khen thưởng và giải thưởng</div>
+                    <!-- div.tt-t -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="item-a">
+                          <div class="tt-b">Khen thưởng và giải thưởng</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="commendationExperienceModel.name" name="commendationname" #commendationname="ngModel" required/>
+
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+                      <div class="col-md-5">
+                        <div class="item-a">
+                          <div class="tt-b">Quyết định</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="commendationExperienceModel.decision" name="commendationdecision" #commendationdecision="ngModel"
+                              required/>
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+
+
+                    </div>
+                    <!-- div.row -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="item-a">
+                          <div class="tt-b">Thời gian</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="commendationExperienceModel.date" name="commendationdate" #commendationdate="ngModel" required/>
+                          </div>
+                          <!-- div.row -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+                      <div class="col-md-5">
+                        <div class="item-a">
+                          <div class="tt-b">Cấp khen thưởng</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <input type="text" [(ngModel)]="commendationExperienceModel.level" name="commendationlevel" #commendationlevel="ngModel"
+                              required/>
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+
+
+                    </div>
+                    <!-- div.row -->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="item-a">
+                          <div class="tt-b">Nội dung</div>
+                          <!-- div.tt-b -->
+                          <div class="input">
+                            <textarea [(ngModel)]="commendationExperienceModel.content" name="commendationcontent" #commendationcontent="ngModel" required></textarea>
+
+                          </div>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- div.col-md-7 -->
+
+
+                    </div>
+                    <!-- div.row -->
+                    <div class="row">
+                      <div class="col-md-7">
+                        <div class="list-btn">
+                          <button #btsubmitCommendation type="submit" style="visibility:hidden"> </button>
+                          <a href="javascript:;" (click)="btsubmitCommendation.click()" class="btn-blue">LƯU LẠI</a>
+                          <a href="javascript:;" data-dismiss="modal" class="btn-blue xam">HỦY BỎ</a>
+                        </div>
+                        <!-- div.list-btn -->
+                      </div>
+                      <!-- div.col-md-7 -->
+                      <!-- <div class="col-md-5">
+                        <span style="color:red" *ngIf="formCommendation.invalid &&   formCommendation._submitted"> Vui lòng nhập đầy đủ thông tin</span>
+                      </div> -->
+                    </div>
+                    <!-- div.row -->
+
+                  </div>
+                </form>
+                <!-- div.main-form2 -->
+              </div>
+
+            </div>
+            <!-- end modal-content -->
+
+          </div>
+        </div>
+        <!-- end modal -->
+      </div>
+      <div class="col-sm-10 col-sm-offset-1" *ngIf="step==4">
+        <form novalidate name="formRegister4" #formRegister4="ngForm" (ngSubmit)="formRegister4.valid&& (password.value=== retypepassword.value) && gotostep(5)"
+          (keydown.enter)="$event.preventDefault()">
+          <div class="main-bg-white1">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+
+                <div class="tt-welcome">
+                  Chào mừng bạn đã tham gia cùng chúng tôi . <br> Rất cảm ơn bạn đã cung cấp thông tin chi tiết, giờ chỉ
+                  cần bước cuối cùng tạo tài khoản
+                </div>
+                <!-- div.tt-welcome -->
+
+                <div class="main-form1">
+                  <div class="main-xacnhan-reg">
+                    <div class="tt-a red" *ngIf="RegisterError">
+                      {{RegisterError}}
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Email</div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                        <input type="text" [(ngModel)]="usermodel.username" name="username" #username="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                          minlength="3" maxlength="50">
+
+
+                        <div class="tool" *ngIf="username?.errors?.required && formRegister4.invalid&& formRegister4._submitted">
+                          Nhập Email
+                        </div>
+                        <div class="tool" *ngIf="(username?.errors?.pattern||username?.errors?.minlength||username?.errors?.maxlength) && formRegister4.invalid&& formRegister4._submitted">
+                          Email không đúng định dạng
+                        </div>
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Mật khẩu</div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool ">
+                        <input type="password" [(ngModel)]="usermodel.password" name="password" #password="ngModel" minlength="4" maxlength="18"
+                          required>
+                        <div class="tool" *ngIf="password?.errors?.required && formRegister4.invalid&& formRegister4._submitted">
+                          Nhập mật khẩu
+                        </div>
+                        <div class="tool" *ngIf="(password?.errors?.minlength||password?.errors?.maxlength)&& formRegister4.invalid&& formRegister4._submitted">
+                          Mật khẩu từ 4-18 ký tự
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- div.phai -->
+                  </div>
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Nhập lại mật khẩu</div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool ">
+                        <input type="password" [(ngModel)]="usermodel.retypepassword" name="retypepassword" #retypepassword="ngModel">
+                        <div class="tool" *ngIf="(password.value!= retypepassword.value)&&  formRegister4._submitted">
+                          Mật khẩu không giống nhau
+                        </div>
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="trai"></div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="phai-a">
+                        <button #btsubmit4 type="submit" style="visibility:hidden">TIẾP TỤC </button>
+                        <a class="btn-blue xam to" (click)="backtostep(3)" href="javascript:;">QUAY LẠI </a>
+                        <a (click)="btsubmit4.click()" href="javascript:;" class="btn-blue to">ĐĂNG KÝ</a>
+                      </div>
+                      <!-- div.phai-a -->
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <!-- div.item -->
+
+                </div>
+                <!-- end main-form1 -->
+              </div>
+              <!-- div.col-md-8 col-md-offset-2 -->
+
+
+            </div>
+            <!-- div.row -->
+
+
+          </div>
+          <!-- div.main-bg-white1 -->
+        </form>
+      </div>
+      <div class="col-md-10 col-md-offset-1" *ngIf="step==5">
+
+        <div class="reg-complete">
+          <div class="tt-a">Chúc mừng bạn đã tạo tài khoản thành công</div>
+          <!-- div.tt-a -->
+          <div class="des">Tài khoản của bạn đang được duyệt bởi Quản trị viên</div>
+          <!-- div.des -->
+          <img src="assets/images/checkok.png" alt="" class="img">
+
+          <div class="note">
+            Chuyển về màn hình chính sau <i><b>{{Time}} giây</b></i> hoặc
+            <a routerLink="/" class="link">ấn vào đây để chuyển</a>
+          </div>
+          <!-- div.note -->
+
+
+        </div>
+        <!-- div.reg-complete -->
+      </div>
+    </div>
+  </div>
+</div>

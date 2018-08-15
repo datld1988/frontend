@@ -1,0 +1,554 @@
+<div class="bao-all-main-content" style="padding-top: 0" *ngIf="wapUserInfo.isloadpage">
+  <div class="main-all-thongtin-tiensi">
+    <app-avatar *ngIf="wapUserInfo.isloadpage" [wapUserInfo]=wapUserInfo [isOwner]=isDisableTab></app-avatar>
+  </div>
+  <!-- div.main-all-thongtin-tiensi -->
+
+
+  <div class="container">
+    <div class="row cus-20">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="list-tab-home">
+
+
+
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" [class.active]="(tabStr==='home')">
+              <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Tổng quát</a>
+            </li>
+            <li role="presentation" [class.active]="(tabStr==='profile')">
+              <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Hồ sơ cá nhân</a>
+            </li>
+            <li role="presentation" [class.active]="(tabStr==='dsdetai')">
+              <a href="#dsdetai" aria-controls="dsdetai" role="tab" data-toggle="tab">Danh sách đề tài</a>
+            </li>
+            <!-- <li role="presentation" *ngIf="isDisableTab">
+              <a href="#qlnghiencuu" aria-controls="qlnghiencuu" role="tab" data-toggle="tab">Quản lý nghiên cứu</a>
+            </li> -->
+            <li role="presentation" [class.active]="(tabStr==='report')" *ngIf="isDisableTab">
+              <a href="#report" aria-controls="report" role="tab" data-toggle="tab">Báo cáo hoạt động</a>
+            </li>
+
+          </ul>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane" [class.active]="(tabStr==='home')" id="home">
+
+              <div class="content-tab">
+                <div class="row cus-20">
+                  <div class="col-md-7">
+                    <div class="them-detai-danglam">
+                      <div class="media">
+                        <div class="media-body">
+                          <div class="tt-a">
+                            Đề tài bạn đang thực hiện ngay lúc này?
+                          </div>
+                          <!-- div.tt-a -->
+
+                        </div>
+                        <!-- div.media-body -->
+                        <div class="media-right">
+                          <div class="img ">
+                            <img src="assets/images/img-bs.jpg" style="max-width: none" alt="" />
+                          </div>
+                          <!-- div.img -->
+
+                        </div>
+                        <!-- div.media-right -->
+
+
+                      </div>
+                      <!-- div.media -->
+                      <div class="item">
+                        <div class="input">
+                          <input type="text" name="workName" placeholder="Nhập tên đề tài" />
+                        </div>
+                        <!-- div.input -->
+                      </div>
+                      <!-- div.item -->
+                      <div class="item">
+                        <div class="input">
+                          <textarea name="workTarget" id="workTarget" cols="30" rows="4" placeholder="Mục tiêu đề tài"></textarea>
+                        </div>
+                        <!-- div.input -->
+                      </div>
+                      <span class="help-block" style="color: red" *ngIf="validAddWork">Vui lòng nhập đầy đủ thông tin để thêm đề tài</span>
+                      <!-- div.item -->
+                      <div class="item">
+                        <div class="phai-a">
+                          <a style="cursor: pointer" (click)="addWork()" class="btn-blue to">THÊM ĐỀ TÀI</a>
+                        </div>
+                        <!-- div.phai-a -->
+                      </div>
+                      <!-- div.item -->
+
+
+                    </div>
+                    <!-- div.them-detai-danglam -->
+
+                    <div class="soluong-detai" style="text-align: center">
+
+                      <div class="item">
+                        <div class="tt">{{ this.totalWork }}</div>
+                        <!-- div.tt -->
+                        <div class="des">Đề tài</div>
+                        <!-- div.des -->
+                      </div>
+                      <!-- div.item -->
+
+                      <div class="item">
+                        <div class="tt">{{ this.totalArticle }}</div>
+                        <!-- div.tt -->
+                        <div class="des">Bài báo</div>
+                        <!-- div.des -->
+                      </div>
+                      <!-- div.item -->
+                    </div>
+                    <!-- div.soluong-detai -->
+
+                    <div class="tt-main-bold" *ngIf="this.lstWorks?.length > 0">Đề tài nghiên cứu</div>
+                    <div class="tt-main-bold" *ngIf="this.lstWorks?.length === 0">Chưa có dữ liệu đề tài</div>
+                    <!-- div.tt-main-bold -->
+
+                    <div class="main-list-detai-nghiencuu">
+
+                      <div class="item" *ngFor="let work of this.lstWorks">
+                        <div class="row cus-15">
+
+                          <div class="col-sm-3 col-sm-push-9">
+                            <div style="text-align:center">
+                              <div class="img hot">
+                                <img src="assets/images/chungnhan.png" alt="" />
+
+                              </div>
+                              <div class="quo">{{ work.statitics.view_number }} Lượt xem</div>
+                              <!-- div.img -->
+                            </div>
+
+
+                          </div>
+                          <!-- div.col-sm-3 col-sm-pull-9 -->
+
+                          <div class="col-sm-9 col-sm-pull-3">
+                            <div class="tt-a">
+                              <a [routerLink]="['/chi-tiet-de-tai', work._id]"> {{ work.name }}</a>
+                            </div>
+                            <!-- div.tt-a -->
+
+                            <div class="des">
+                              <a class="cat">Đề tài</a>
+                              <div class="date">Tháng {{ work.created_date | date: 'MM/yyyy' }} - {{ work.author }}</div>
+                              <!-- div.date -->
+                            </div>
+                            <!-- div.des -->
+
+                            <div class="except">
+                              {{ work.goal_completion }}
+                            </div>
+                            <!-- div.except -->
+
+                            <div class="more">
+                              <a [routerLink]="['/chi-tiet-de-tai', work._id]">XEM NGAY</a>
+                            </div>
+                            <!-- div.more -->
+                          </div>
+                          <!-- div.col-sm-9 -->
+                        </div>
+                        <!-- div.row cus-15 -->
+                      </div>
+                      <!-- div.item -->
+
+                      <div class="item" *ngIf="totalWork > limitWork">
+                        <div class="phai-a">
+                          <div class="main-nav-page">
+                            <app-pagination [offset]="(pageWork-1)*limitWork" [limit]="limitWork" [size]="totalWork" (pageChange)="getWorks($event)"></app-pagination>
+                          </div>
+                          <!-- div.main-nav-page -->
+                        </div>
+                        <!-- div.phai-a -->
+
+                      </div>
+                      <!-- div.item -->
+
+
+
+                    </div>
+                    <!-- div.main-list-detai-nghiencuu -->
+
+                    <div class="mr-bt-20"></div>
+                    <!-- div.mr-bt-20 -->
+
+                  </div>
+                  <!-- div.col-md-7 -->
+
+
+                  <div class="col-md-5">
+
+                    <div class="main-hoatdong-khoahoc">
+                      <div class="tt-main-bold">
+                        Hoạt động Khoa học
+                      </div>
+                      <!-- div.tt-main-bold -->
+                      <ul class="linhvuc">
+                        <li>Lĩnh vực nghiên cứu</li>
+                        <li><a class="link">{{wapUserInfo.research_areaSelected.text}}</a></li>
+                      </ul>
+                      <!-- ul.linhvuc -->
+                      <div class="tt-a">Chủ đề nghiên cứu</div>
+                      <!-- div.tt-a -->
+                      <div class="main-list-chude">
+                        <div class="item" *ngFor="let reachArea of wapUserInfo.research_topic">
+                          <span>{{reachArea}}</span>
+                        </div>
+                        <!-- div.item -->
+
+                      </div>
+                      <!-- end main-list-chude -->
+                      <div class="tt-a">Hội khoa học Việt Nam</div>
+                      <!-- div.tt-a -->
+
+                    </div>
+                    <!-- div.main-hoatdong-khoahoc -->
+
+                    <div class="tt-main-bold" *ngIf="this.lstArticle?.length > 0">Bài báo</div>
+                    <div class="tt-main-bold" *ngIf="this.lstArticle?.length === 0">Chưa có dữ liệu bài báo</div>
+                    <!-- div.tt-main-bold -->
+
+                    <div class="main-list-detai-nghiencuu">
+
+                      <div class="item" *ngFor="let article of this.lstArticle">
+                        <div class="tt-a">
+                          <a [routerLink]="['/chi-tiet-bai-bao', article._id]">{{ article.name }}</a>
+                        </div>
+                        <!-- div.tt-a -->
+
+                        <div class="des">
+                          <a href="" class="cat">Bài báo</a>
+                          <div class="date">Tháng {{ article.created_date | date: 'MM/yyyy' }} - {{ article.author }}</div>
+                          <!-- div.date -->
+                        </div>
+                        <!-- div.des -->
+
+                        <div class="except">
+                          {{ article.summary }}
+                        </div>
+                        <!-- div.except -->
+
+                        <div class="more">
+                          <div class="t">
+                            <div class="quo">
+                              <div class="quo">{{ article.statitics.view_number }} Lượt xem</div>
+                            </div>
+                            <!-- div.quo -->
+
+                          </div>
+                          <!-- div.t -->
+
+                          <div class="p">
+                            <a [routerLink]="['/chi-tiet-bai-bao', article._id]">XEM NGAY</a>
+                          </div>
+                          <!-- div.p -->
+                          <div class="clear"></div>
+                          <!-- div.clear -->
+
+
+                        </div>
+                        <!-- div.more -->
+
+
+
+                      </div>
+                      <!-- div.item -->
+
+                      <div class="item" *ngIf="totalArticle > limitArticle">
+                        <div class="phai-a">
+                          <div class="main-nav-page">
+                            <app-pagination [offset]="(pageArticle-1)*limitArticle" [limit]="limitArticle" [size]="totalArticle" (pageChange)="getArticle($event)"></app-pagination>
+                          </div>
+                          <!-- div.main-nav-page -->
+                        </div>
+                        <!-- div.phai-a -->
+                      </div>
+                      <!-- div.item -->
+
+                    </div>
+                    <!-- end main-list-detai-nghiencuu -->
+
+                  </div>
+                  <!-- div.col-md-5 -->
+
+                </div>
+                <!-- div.row -->
+
+
+
+              </div>
+              <!-- div.content-tab -->
+
+            </div>
+            <!-- end tabpanel -->
+            <div role="tabpanel" class="tab-pane" [class.active]="(tabStr==='profile')" id="profile">
+
+              <div class="content-tab">
+                <app-userinfo *ngIf="wapUserInfo.isloadpage" [wapUserInfo]=wapUserInfo [isOwner]=isDisableTab></app-userinfo>
+
+                <app-workplaceinfo *ngIf="wapUserInfo.isloadpage && this.wapUserInfo.userprofile.isActived" [wapUserInfo]=wapUserInfo [isOwner]=isDisableTab></app-workplaceinfo>
+
+                <app-teachinfo *ngIf="wapUserInfo.isloadpage" [wapUserInfo]=wapUserInfo [isOwner]=isDisableTab></app-teachinfo>
+
+                <app-changepassword *ngIf="isDisableTab" [wapUserInfo]=wapUserInfo [isOwner]=isDisableTab></app-changepassword>
+
+
+
+              </div>
+              <!-- div.content-tab -->
+
+            </div>
+            <!-- end tabpanel -->
+
+            <div role="tabpanel" class="tab-pane" [class.active]="(tabStr==='dsdetai')" id="dsdetai">
+              <div class="content-tab">
+
+
+                <div class="tt-main-bold" *ngIf="this.lstAll?.length > 0">Danh sách đề tài, báo cáo nghiên cứu</div>
+                <div class="tt-main-bold" *ngIf="this.lstAll?.length === 0">Chưa có dữ liệu</div>
+
+                <div class="row cus-20">
+                  <div class="col-md-8">
+
+                    <div class="main-list-detai-nghiencuu" *ngIf="this.lstAll?.length > 0">
+
+                      <div class="header">
+                        <!-- <div class="trai">
+                          <div class="input search search-left">
+
+                            <input type="text" placeholder="Tìm kiếm....">
+                            <a href="" class="search"><img src="assets/images/icon-search.png" alt=""></a>
+
+                          </div>
+                        </div> -->
+
+
+                        <div class="phai">
+                          <div class="main-sapxep">
+                            <div class="tt">Sắp xếp theo</div>
+                            <!-- div.tt -->
+                            <select name="" id="">
+																	<option value="1">Mới nhất</option>
+																	<option value="2">Xem nhiều nhất</option>
+																</select>
+                          </div>
+                          <!-- div.main-sapxep -->
+                        </div>
+                        <!-- div.phai -->
+
+                        <div class="clear"></div>
+                        <!-- div.clear -->
+                      </div>
+                      <!-- div.header -->
+
+
+                      <div class="item" *ngFor="let work of this.lstAll">
+                        <div class="row cus-15">
+
+                          <div class="col-sm-3 col-sm-push-9">
+                            <div style="text-align:center">
+                              <div class="img hot">
+                                <img src="assets/images/chungnhan.png" alt="" />
+                              </div>
+                              <!-- div.img -->
+                            </div>
+
+
+                          </div>
+                          <!-- div.col-sm-3 col-sm-pull-9 -->
+
+                          <div class="col-sm-9 col-sm-pull-3">
+
+                            <div class="des cus">
+                              <a style="cursor: none" class="cat">{{ work.type == 1 ? 'Đề tài' : 'Bài báo' }}</a>
+                              <div class="date">Tháng {{ work.created_date | date: 'MM/yyyy' }} - {{ work.author }}</div>
+                              <!-- div.date -->
+                            </div>
+                            <!-- div.des -->
+
+
+                            <div class="tt-a to">
+                              <a [routerLink]="['/chi-tiet-de-tai', work._id]" *ngIf="work.type == 1"> {{ work.name }}</a>
+                              <a [routerLink]="['/chi-tiet-bai-bao', work._id]" *ngIf="work.type == 2"> {{ work.name }}</a>
+                            </div>
+                            <!-- div.tt-a -->
+
+                            <div class="list-avt">
+                              <div class="avt" *ngFor="let au of work.cochair">
+                                <a [routerLink]="['/profile',au.username,'profile']" *ngIf="au.username !== undefined">
+														<img [(src)]="au.linkAvar" alt="" />
+														<span>{{ au.fullname }}</span>
+                          </a>
+
+                                <a style="cursor: pointer" *ngIf="au.username === undefined">
+														<img src="assets/images/avt-nghiencuu.jpg" alt="Tác giả không có trong hệ thống" />
+														<span>{{ au.fullname }}</span>
+													</a>
+                              </div>
+                              <!-- div.avt -->
+
+                              <!-- div.avt -->
+                              <div class="avt">
+                                [...]
+                              </div>
+                              <!-- div.avt -->
+
+                            </div>
+                            <!-- div.list-avt -->
+                            <div class="except">
+                              <ng-container *ngIf="work.type == 1">{{ work.goal_completion }}</ng-container>
+                              <ng-container *ngIf="work.type == 2">{{ work.summary }}</ng-container>
+                            </div>
+                            <!-- div.except -->
+                          </div>
+                          <!-- div.col-sm-9 -->
+                        </div>
+                        <!-- div.row cus-15 -->
+                      </div>
+                      <!-- div.item -->
+                      <div class="item">
+                        <div class="phai-a">
+                          <div class="main-nav-page">
+                            <app-pagination [offset]="(pageAll-1)*limitAll" [limit]="limitAll" [size]="totalAll" (pageChange)="getAll($event)"></app-pagination>
+                          </div>
+                          <!-- div.main-nav-page -->
+                        </div>
+                        <!-- div.phai-a -->
+
+                      </div>
+                      <!-- div.item -->
+
+
+                    </div>
+                    <!-- div.main-list-detai-nghiencuu -->
+
+
+                  </div>
+                  <!-- div.col-md-8 -->
+
+                  <div class="col-md-4">
+                    <div class="main-cate-detai">
+
+                      <div class="content">
+                        <div class="tt-a">Đề tài đăng ký mới</div>
+                        <ul>
+                          <li><a style="cursor: pointer" (click)="fillterWorkStatus(-1, 1)">Đề tài cần cập nhật để yêu cầu duyệt</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWorkStatus(-1, 3)">Đề tài chờ duyệt quyết định</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWorkStatus(-1, 2)">Đề tài bị từ chối duyệt quyết định</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWorkStatus(0, 3)">Đề tài chờ duyệt đề cương</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWorkStatus(0, 2)">Đề tài bị từ chối duyệt đề cương</a></li>
+                        </ul>
+                      </div>
+
+                      <div class="content">
+                        <div class="tt-a">Đề tài đang triển khai</div>
+                        <ul>
+                          <li><a style="cursor: pointer" (click)="fillterWorkStatus(null, 1)">Đề tài được chỉnh sửa</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWorkStatus(null, 3)">Đề tài chờ duyệt</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWorkStatus(null, 2)">Đề tài bị từ chối duyệt cập nhật/nghiệm thu</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWorkStatus(null, -1)">Đề tài bị quản trị viên khóa</a></li>
+                        </ul>
+                      </div>
+
+                      <div class="content">
+                        <div class="tt-a">Đề tài nghiên cứu</div>
+                        <ul>
+                          <li><a style="cursor: pointer" (click)="fillterWork(1)">Cấp nhà nước (TD 01)</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWork(2)">Cấp bộ và tương đương (TD 02)</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWork(3)">Cấp thành phố</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWork(4)">Đề tài nhánh cấp nhà nước</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterWork(5)">Đề tài cấp cơ sở và tương đương (TD 03)</a></li>
+                        </ul>
+                      </div>
+                      <!-- div.content -->
+
+                      <div class="content">
+                        <div class="tt-a">Trạng thái bài báo</div>
+                        <!-- div.tt-a -->
+
+                        <ul>
+                          <li><a style="cursor: pointer" (click)="fillterArticleStatus(null, 1)">Bài báo cần cập nhật để yêu cầu duyệt</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterArticleStatus(null, 3)">Bài báo đang chờ duyệt</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterArticleStatus(null, 2)">Bài báo từ chối duyệt</a></li>
+                        </ul>
+                      </div>
+
+                      <div class="content">
+                        <div class="tt-a">Bài báo nghiên cứu</div>
+                        <!-- div.tt-a -->
+
+                        <ul>
+                          <li><a style="cursor: pointer" (click)="fillterArticle(1)">Bài báo quốc tế</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterArticle(2)">Bài báo trong nước</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterArticle(3)">Bài báo </a></li>
+                          <li><a style="cursor: pointer" (click)="fillterArticle(4)">Hội thảo</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterArticle(5)">Luận văn/ luận án</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterArticle(6)">Tổng quan</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterArticle(7)">Ý kiến</a></li>
+                          <li><a style="cursor: pointer" (click)="fillterArticle(8)">Khác</a></li>
+                        </ul>
+                      </div>
+                      <!-- div.content -->
+
+
+                    </div>
+                    <!-- div.main-cate-detai -->
+
+                    <div class="main-qc">
+                      <a href=""><img src="assets/images/banner-img.jpg" alt="" /></a>
+                    </div>
+                    <!-- div.main-qc -->
+
+
+                  </div>
+                  <!-- div.col-md-4 -->
+
+                </div>
+                <!-- div.row cus-20 -->
+
+
+
+              </div>
+              <!-- div.content-tab -->
+            </div>
+            <!-- end tabpanel -->
+            <div role="tabpanel" class="tab-pane" id="qlnghiencuu" *ngIf="isDisableTab">
+            </div>
+            <!-- end tabpanel -->
+            <div role="tabpanel" class="tab-pane" [class.active]="(tabStr==='report')" id="report" *ngIf="isDisableTab && this.wapUserInfo.userprofile.isActived">
+              <app-user-report fullname="{{wapUserInfo.userprofile.full_name}}" officename="{{wapUserInfo.groupSelected.name}}" username="{{wapUserInfo.username}}">
+
+              </app-user-report>
+
+            </div>
+            <!-- end tabpanel -->
+
+
+
+          </div>
+          <!-- div.tab-content -->
+
+
+
+        </div>
+        <!-- div.list-tab-home -->
+
+
+
+      </div>
+      <!-- div.col-md-10 col-md-offset-1 -->
+
+    </div>
+    <!-- div.row cus-20 -->
+
+  </div>
+  <!-- div.container -->
+
+</div>
+<!-- div.bao-all-main-content -->

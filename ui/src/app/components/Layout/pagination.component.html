@@ -1,0 +1,25 @@
+<ul *ngIf="(totalPages >1)" >
+  <li class="func" (click)="selectPage(1, $event)" *ngIf="(currentPage != 1)">
+    <a href="" title="Go to first page"><img src="assets/images/all-page-left.png" alt=""></a>
+  </li>
+  <li  class="func"  (click)="selectPage(currentPage - 1, $event)" *ngIf="(currentPage != 1)">
+    <a href="" title="Go to previous page"><img src="assets/images/page-left.png" alt=""></a>
+  </li>
+  <li class="disabled" (click)="cancelEvent($event)" *ngIf="(currentPage - range) > 1">
+    <a href="">...</a>
+  </li>
+  <li   *ngFor="let page of pages | async" [class.active]="page == currentPage">
+    <a href="" (click)="selectPage(page, $event)">
+      {{page}}
+    </a>
+  </li>
+  <li class="disabled" (click)="cancelEvent($event)" *ngIf="(currentPage + range) < totalPages">
+    <a href="">...</a>
+  </li>
+  <li class="func" (click)="selectPage(currentPage + 1, $event)" *ngIf="(currentPage != totalPages && totalPages>1)">
+    <a href="" title="Go to next page"><img src="assets/images/page-right.png" alt=""></a>
+  </li>
+  <li class="func" (click)="selectPage(totalPages, $event)" *ngIf="(currentPage != totalPages && totalPages>1)">
+    <a href="" title="Go to last page"><img src="assets/images/all-page-right.png" alt=""></a>
+  </li>
+</ul>

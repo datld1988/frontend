@@ -1,0 +1,241 @@
+/* ==========================================================================
+    CSS Update 11/07/2017
+   ========================================================================== */
+
+
+
+*{}
+
+.responsive-tabs.nav-tabs.cus.color > li > a {
+    padding: 15px 22px;
+}
+
+.bao-all-main-content.color {
+    background-color: #edf5f8;
+}
+
+.main-form1.form-lienhe {
+    background: #ffffff;
+    padding: -webkit-calc(20px + 17 * ((100vw - 300px)/1300)) -webkit-calc(15px + 17 * ((100vw - 300px)/1300));
+    padding: -moz-calc(20px + 17 * ((100vw - 300px)/1300)) -moz-calc(15px + 17 * ((100vw - 300px)/1300));
+    padding: calc(20px + 17 * ((100vw - 300px)/1300)) calc(15px + 17 * ((100vw - 300px)/1300));
+    margin-bottom: 30px;
+}
+
+.main-form1.form-lienhe .tt-new {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.main-form1.form-lienhe * {}
+
+.main-form1.form-lienhe > .item > .trai {
+    max-width: 95px;
+}
+
+.main-form1.form-lienhe > .item > .phai {
+    max-width: 303px;
+    margin-left: 24px;
+}
+
+.main-toggle {
+    margin-bottom: 30px;
+}
+
+.main-toggle .item {
+    border-bottom: 1px dashed #a4bed0;
+}
+
+.main-toggle .item > .content {
+    color: #2f2e2d;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 5px 0 40px;
+}
+
+.main-toggle .item > .head {
+    padding: 18px 0;
+    position: relative;
+    cursor: pointer;
+}
+
+.main-toggle .item > .head
+ .text {
+    color: #6b8aa0;
+    font-size: 16px;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.main-toggle .item.active > .head
+ .text {
+    font-weight: 700;
+}
+
+.main-toggle .item > .head
+ .nut {
+    position: absolute;
+    right: 12px;
+    top: 23px;
+}
+
+.main-toggle .item > .head
+ .nut img {
+    -webkit-transition: 0.4s ease all;
+    -o-transition: 0.4s ease all;
+    -moz-transition: 0.4s ease all;
+    transition: 0.4s ease all;
+}
+
+.main-toggle .item.active > .head
+ .nut img {
+    -webkit-transform: rotate(180deg);
+       -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+         -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+}
+
+.main-gioithieu {}
+
+.main-gioithieu .list-func {
+    margin-top: 40px;
+}
+
+.main-gioithieu .list-func
+ .item {margin-bottom: 40px;}
+
+.main-gioithieu .list-func
+ .item .media-body {
+    vertical-align: middle;
+    color: #337ca6;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.main-gioithieu .list-func
+ .item .media-left {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.main-gioithieu .list-func
+.item img {
+    max-width: none;
+}
+
+.main-gioithieu .list-tin {}
+
+.main-gioithieu .list-tin .item {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.main-gioithieu .list-tin .item .img {
+    margin-bottom: 10px;
+}
+
+.main-gioithieu .list-tin .item .t {
+    color: #2f2e2d;
+    font-style: italic;
+    min-height: 90px;
+}
+
+.main-gioithieu .bv {
+    line-height: 21px;
+    font-size: 14px;
+    color: #2f2e2d;
+    padding: 10px 0;
+}
+
+.main-gioithieu .bv b {
+    font-weight: 600;
+}
+
+.main-gioithieu .bv p {
+    margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+@media(min-width: 768px){
+    .responsive-tabs.nav-tabs > li.active a, .responsive-tabs.nav-tabs > li:hover a{
+        border-bottom-color: #81c784;
+        color: #2f2e2d
+    }
+}
+/* end min 768 */
+@media(max-width: 768px){
+    .main-form1.form-lienhe > .item > .phai{
+        max-width: none;
+        margin-left: 0
+    }
+    .main-form1.form-lienhe > .item > .trai{
+        max-width: none
+    }
+}
+
+/*end update footer*/
+.input textarea {
+    width: 100%;
+    border: 1px solid #c3c9cb;
+    height: 60px;
+    padding: 0 12px;
+    border-radius: 2px;
+    color: #2f2e2d;
+    font-size: 13px;
+    -webkit-appearance: none;
+}
+.main-form2 > .item .new a {
+    position: relative;
+    color: #848383;
+    font-size: 12px;
+    margin-right: 10px;
+    padding-right: 17px;
+    margin-top: 7px;
+}
+.main-form2 > .item .new a span {
+    position: absolute;
+    right: 0;
+    top: 5px;
+}
+.bao-all-nhapten .head  input {
+    border: none;
+    width:100px;
+}
+.bao-all-nhapten .head  .ten-2 {
+
+    margin-bottom: 5px;
+}
+
+.div-loading {
+    background: #fff none repeat scroll 0 0;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    white-space: normal;
+    width: 100%;
+    z-index: 4;
+}
+.div-loading img {
+
+    vertical-align: middle;
+    margin-top: 10%;
+}
+.inputimme 
+{
+    margin-bottom: 15px;
+}
+.inputimme input{
+    width: 60%;
+    float:right;
+}

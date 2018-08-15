@@ -1,0 +1,257 @@
+<div class="all-main-thongtin-canhan">
+  <div class="main-xacnhan-reg">
+  </div>
+  <form (ngSubmit)="onSubmit()" #f="ngForm" (keydown.enter)="$event.preventDefault()">
+    <div class="header">
+      <div class="trai">
+        <div class="tt">Thông tin cá nhân</div>
+        <!-- div.tt -->
+      </div>
+      <!-- div.trai -->
+
+      <div class="phai" *ngIf="isOwner && this.wapUserInfo.userprofile.isActived">
+        <button #btsubmit2 type="submit" style="visibility:hidden">TIẾP TỤC </button>
+        <a id="idUpdateThongTin" class="btn-blue edit" href="javascript:;" (click)="btsubmit2.click()">
+							<img src="assets/images/icon-edit.png" alt="" />
+							<span>CHỈNH SỬA</span>
+						</a>
+      </div>
+      <!-- div.phai -->
+      <div class="clear"></div>
+      <!-- div.clear -->
+    </div>
+
+    <div class="content-thongtin">
+      <div class="row cus-20">
+        <div class="col-md-6">
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt">Họ <span class="sao">*</span></div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+
+            <div class="phai">
+              <div class="input">
+                <input required ngModel [(ngModel)]="wapUserInfo.userprofile.family_name" type="text" name="familyname" #familyname="ngModel"
+                  (keyup)="changeFullname()"  disabled />
+                <span class="help-block" *ngIf="f.value.familyname ==''&& f._submitted">Nhập họ.</span>
+              </div>
+              <!-- div.input -->
+            </div>
+            <!-- div.phai -->
+
+            <div class="clear"></div>
+            <!-- div.clear -->
+          </div>
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt">Tên đệm <span class="sao">*</span></div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+
+            <div class="phai">
+              <div class="input">
+                <input required ngModel [(ngModel)]="wapUserInfo.userprofile.middle_name" type="text" name="middle_name" #middle_name="ngModel"
+                  (keyup)="changeFullname()" disabled />
+                <span class="help-block" *ngIf="f.value.middle_name ==''&& f._submitted">Nhập tên đệm.</span>
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <!-- div.phai -->
+
+            <div class="clear"></div>
+            <!-- div.clear -->
+          </div>
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt">Tên <span class="sao">*</span></div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+
+            <div class="phai">
+              <div class="input">
+                <input required ngModel [(ngModel)]="wapUserInfo.userprofile.first_name" type="text" name="first_name" #first_name="ngModel"
+                  (keyup)="changeFullname()" disabled />
+                <span class="help-block" *ngIf="f.value.first_name ==''&& f._submitted">Nhập tên đệm.</span>
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <!-- div.phai -->
+
+            <div class="clear"></div>
+            <!-- div.clear -->
+          </div>
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt">Giới tính <span class="sao">*</span></div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+            <div class="phai">
+              <div class="input">
+                <input type="radio" name="gender" id="nam" [value]="1" [(ngModel)]="wapUserInfo.userprofile.gender" disabled>
+                <label for="nam">Nam</label>
+                <input type="radio" name="gender" id="nu" [value]="2" [(ngModel)]="wapUserInfo.userprofile.gender" disabled>
+                <label for="nu">Nữ</label>
+              </div>
+              <!-- end input -->
+
+            </div>
+            <!-- div.phai -->
+
+            <div class="clear"></div>
+            <!-- div.clear -->
+          </div>
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt">Ngày sinh <span class="sao">*</span></div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+
+            <div class="phai">
+              <div class="input">
+                <!--<input type="text" [(ngModel)]="userprofile.birthday" name="birthday" #birthday="ngModel" disabled />-->
+                <input type="text" [(ngModel)]="birthDayText" (blur)="birthDayText = birthday.value" name="birthday" #birthday #birthdayinput="ngModel"
+                  id="birthday" disabled>
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <!-- div.phai -->
+
+            <div class="clear"></div>
+            <!-- div.clear -->
+          </div>
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt-s">Học hàm <span class="star">*</span></div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+            <div class="phai">
+              <div class="input have_tool">
+                <select name="academic_rank" id="academic_rank" [(ngModel)]="wapUserInfo.academic_rankSelected" disabled required>
+											
+                          <option *ngFor="let group of wapUserInfo.lstacademic_rank" [ngValue]="group">{{group.text}}</option>
+											</select>
+                <div class="icon-select">
+                  <img src="assets/images/icon-select.png" alt="">
+                </div>
+                <span class="help-block" *ngIf="wapUserInfo.academic_rankSelected >0&& f._submitted">Chọn đúng học hàm</span>
+                <!-- div.icon-select -->
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <div class="clear"></div>
+            <!-- div.phai -->
+          </div>
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt-s">Học vị <span class="star">*</span></div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+            <div class="phai">
+              <div class="input have_tool">
+                <select name="degree" id="degree" [(ngModel)]="wapUserInfo.degreeSelected" disabled>
+											
+                          <option *ngFor="let group of wapUserInfo.lstdegree" [ngValue]="group">{{group.text}}</option>
+											</select>
+                <div class="icon-select">
+                  <img src="assets/images/icon-select.png" alt="">
+                </div>
+                <!-- div.icon-select -->
+                <span class="help-block" *ngIf="wapUserInfo.degreeSelected >0&& f._submitted">Chọn đúng học vị</span>
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <!-- div.phai -->
+          </div>
+
+        </div>
+        <!--end <div class="col-md-6"> 1-->
+
+        <div class="col-md-6">
+          <div class="item">
+            <div class="trai">
+              <div class="tt">Số điện thoại</div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+
+            <div class="phai">
+              <div class="input">
+                <input type="text" [(ngModel)]="wapUserInfo.userprofile.mobile" name="mobile" #mobile="ngModel" disabled />
+              </div>
+              <!-- div.input -->
+            </div>
+            <!-- div.phai -->
+
+            <div class="clear"></div>
+            <!-- div.clear -->
+          </div>
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt">Địa chỉ</div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+
+            <div class="phai">
+              <div class="input">
+                <input type="text" [(ngModel)]="wapUserInfo.userprofile.address" name="address" #mobile="ngModel" disabled />
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <!-- div.phai -->
+
+            <div class="clear"></div>
+            <!-- div.clear -->
+          </div>
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt-s">Trang cá nhân</div>
+              <!-- div.tt -->
+            </div>
+            <div class="phai">
+              <div class="input">
+                <div  *ngIf="isDisplayHomepage">
+                  <input type="text" [(ngModel)]="homepagemodel" name="homepagemodel" #homepageinput="ngModel">
+                  <div class="ab_p cus">
+                    <div class="btn-add">
+                      <img src="assets/images/icon-add1.png" alt="" (click)="addhomepage()">
+                    </div>
+                  </div>
+                </div>
+                <div class="new" *ngIf="(wapUserInfo.userprofile.homepage | json) != '[]'">
+                  <a *ngFor="let pageitem of wapUserInfo.userprofile.homepage;index as ihome" href="javascript:;">{{pageitem}} <span><img (click)="wapUserInfo.userprofile.homepage.splice(ihome, 1);" src="assets/images/icon-x.png" alt=""></span></a>
+                </div>
+
+              </div>
+              <!-- div.input -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end <div class="row cus-20">-->
+    </div>
+  </form>
+</div>

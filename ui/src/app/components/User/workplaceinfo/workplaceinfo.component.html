@@ -1,0 +1,177 @@
+<!-- div.all-main-thongtin-canhan -->
+<div class="all-main-thongtin-canhan">
+  <form (ngSubmit)="onSubmit()" #f3="ngForm" (keydown.enter)="$event.preventDefault()">
+    <div class="header">
+      <div class="trai">
+        <div class="tt">
+          <ng-container>Thông tin cơ sở làm việc</ng-container>
+          <ng-container *ngIf="isOwner">(Liên hệ với administrator để thay đổi thông tin)</ng-container>
+        </div>
+        <!-- div.tt -->
+      </div>
+      <!-- div.trai -->
+
+      <!-- <div class="phai" *ngIf="isOwner"> -->
+      <div class="phai">
+        <!-- <div class="tt">Liên hệ với administrator để thay đổi thông tin</div> -->
+        <!-- <button #btsubmit3 type="submit" style="visibility:hidden"  *ngIf="false">TIẾP TỤC </button>
+        <a id="idUpdateNoiLamViec" class="btn-blue edit" href="javascript:;" (click)="btsubmit3.click()"  *ngIf="false">
+							<img src="assets/images/icon-edit.png" alt="" />
+							<span>CHỈNH SỬA</span>
+						</a> -->
+
+      </div>
+      <!-- div.phai -->
+      <div class="clear"></div>
+    </div>
+    <!-- div.clear -->
+    <div class="content-thongtin">
+      <div class="row cus-20">
+        <div class="col-md-20">
+          <div class="item">
+            <div class="trai">
+              <div class="tt-s">Cơ sở <span class="star">*</span></div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+            <div class="phai">
+              <div class="input have_tool">
+                <select disabled name="group-select" id="group-select" [(ngModel)]="wapUserInfo.groupSelected.code" (change)="changeGroup()">
+											   <option *ngFor="let group of wapUserInfo.lstGroup" [value]="group.code">{{group.name}}</option>
+											</select>
+                <div class="icon-select">
+                  <img src="assets/images/icon-select.png" alt="">
+                </div>
+                <!-- div.tool -->
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <div class="clear"></div>
+            <!-- div.phai -->
+          </div>
+
+          <!-- div.item -->
+          <div class="item">
+            <div class="trai">
+              <div class="tt-s">Khoa/Phòng/Ban<span class="star">*</span></div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+            <div class="phai">
+              <div class="input have_tool">
+                <select name="department" id="department" [(ngModel)]="wapUserInfo.departmentSelected.code" disabled>
+                          <option *ngFor="let group of wapUserInfo.lstDepartment" [value]="group.code">{{group.name}}</option>
+											</select>
+                <div class="icon-select">
+                  <img src="assets/images/icon-select.png" alt="">
+                </div>
+                <!-- div.icon-select -->
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <div class="clear"></div>
+            <!-- div.phai -->
+          </div>
+          <!-- div.item -->
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt-s">Địa chỉ cơ quan</div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+            <div class="phai">
+              <div class="input have_tool">
+                <input disabled="disabled" type="text" [(ngModel)]="wapUserInfo.groupSelected.address" name="groupaddress">
+
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <div class="clear"></div>
+            <!-- div.phai -->
+          </div>
+
+          <div class="item">
+            <div class="trai">
+              <div class="tt-s">Điện thoại cơ quan</div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+            <div class="phai">
+              <div class="input have_tool">
+                <input disabled="disabled" type="text" [(ngModel)]="wapUserInfo.groupSelected.phone" name="groupphone">
+
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <div class="clear"></div>
+            <!-- div.phai -->
+          </div>
+
+          <!-- div.item -->
+          <div class="item">
+            <div class="trai">
+              <div class="tt-s">Fax</div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+            <div class="phai">
+              <div class="input have_tool">
+                <input disabled="disabled" type="text" [(ngModel)]="wapUserInfo.groupSelected.fax" name="groupfax">
+
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <div class="clear"></div>
+            <!-- div.phai -->
+          </div>
+
+          <!-- div.item -->
+          <div class="item">
+            <div class="trai">
+              <div class="tt-s">Email</div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+            <div class="phai">
+              <div class="input have_tool">
+                <input disabled="disabled" type="text" [(ngModel)]="wapUserInfo.groupSelected.email" name="groupemail">
+
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <div class="clear"></div>
+            <!-- div.phai -->
+          </div>
+
+          <!-- div.item -->
+          <div class="item">
+            <div class="trai">
+              <div class="tt-s">Website</div>
+              <!-- div.tt -->
+            </div>
+            <!-- div.trai -->
+            <div class="phai">
+              <div class="input have_tool">
+                <input disabled="disabled" type="text" [(ngModel)]="wapUserInfo.groupSelected.website" name="groupwebsite">
+
+              </div>
+              <!-- div.input -->
+
+            </div>
+            <div class="clear"></div>
+            <!-- div.phai -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- div.header -->
+  </form>
+</div>

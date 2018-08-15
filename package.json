@@ -1,0 +1,57 @@
+{
+  "name": "data-processing-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon -configs -w services -w modules -w framework -w models --exec \"node app.js\"",
+    "dev": "",
+    "build": "babel src -s -D -d dist --presets es2015,stage-0",
+    "test": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://117.103.207.105/hmu/khcn.git"
+  },
+  "author": "nghiapd@vtc.vn",
+  "license": "ISC",
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "rules": {
+      "no-console": 0,
+      "no-unused-vars": 1
+    }
+  },
+  "jshintConfig": {
+    "esversion": 6
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "compression": "^1.6.2",
+    "express": "^4.15.2",
+    "grpc": "^1.2.4",
+    "jsonwebtoken": "^7.3.0",
+    "lodash": "^4.17.4",
+    "log4js": "^1.1.1",
+    "md5": "^2.2.1",
+    "moment": "^2.18.1",
+    "mongoose": "^4.9.3",
+    "node-fw": "1.1.4",
+    "node-schedule": "^1.2.1",
+    "nodemailer": "^4.0.1",
+    "pinpoint-fw": "1.1.4",
+    "validator": "^7.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "nodemon": "^1.11.0"
+  }
+}

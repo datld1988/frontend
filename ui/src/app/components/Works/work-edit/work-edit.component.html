@@ -1,0 +1,735 @@
+<div class="bao-all-main-content" *ngIf="isLoadingPage">
+  <form name="formEditWork" #formEditWork="ngForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="main-bg-white1">
+            <div class="main-form4 cus">
+              <div class="row cus-15">
+                <div class="col-md-6">
+                  <div class="tt-a">Thay đổi thông tin đề tài</div>
+                  <!-- div.tt-a -->
+                  <div class="item">
+                    <div class="tt">Mã đề tài</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" required ngModel id="masoDeTai" name="masoDeTai" #masoDeTai="ngModel" [(ngModel)]="workEdit.masoDeTai">
+                    </div>
+                    <span style="color: red" class="help-block" *ngIf="this.workEdit.masoDeTai==''">
+                        <b>Hãy nhập mã đề tài</b></span>
+                    <!-- div.input -->
+                  </div>
+                  <div class="item">
+                    <div class="tt">Tên đề tài</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" required ngModel id="workName" name="workName" #workName="ngModel" [(ngModel)]="workEdit.name">
+                    </div>
+                    <span style="color: red" class="help-block" *ngIf="this.workEdit.name==''">
+                        <b>Hãy nhập tên đề tài</b></span>
+                    <!-- div.input -->
+                  </div>
+                  <div class="item">
+                    <div class="tt">Tổ chức chủ trì thực hiện</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" required ngModel [(ngModel)]=" workEdit.org_impl" name="orgImpl" #orgImpl="ngModel">
+                      <span style="color: red" class="help-block" *ngIf=" workEdit.org_impl ==''">Hãy nhập Tổ chức chủ trì thực hiện</span>
+
+                    </div>
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="tt">Tổ chức phối hợp thực hiện</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" required ngModel [(ngModel)]=" workEdit.org_coo_impl" name="orgCooImpl" #orgCooImpl="ngModel">
+                      <span style="color: red" class="help-block" *ngIf=" workEdit.org_coo_impl ==''">Hãy nhập Tổ chức phối hợp thực hiện</span>
+
+                    </div>
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="tt">Nước phối hợp thực hiện</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" required ngModel [(ngModel)]=" workEdit.country_impl" name="countryImpl" #countryImpl="ngModel">
+                      <span style="color: red" class="help-block" *ngIf=" workEdit.country_impl ==''">Hãy nhập Nước phối hợp thực hiện</span>
+
+                    </div>
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="tt">Năm xét duyệt</div>
+                    <!-- div.tt -->
+                    <div class="input have_tool">
+                      <input type="number" [(ngModel)]="workEdit.review_date" name="review_date" id="reviewdate" #reviewdate #reviewdateinput="ngModel"
+                        required/>
+                      <span style="color: red" class="help-block" *ngIf="workEdit.review_date==null && formEditWork._submitted">
+                        Hãy nhập năm xét duyệt</span>
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Thời gian dự kiến nghiệm thu</div>
+                    <!-- div.tt -->
+                    <div class="input have_tool">
+                      <input type="text" [ngModel]="expected_date" (blur)="expected_date = expecteddate.value" name="expected_date" #expecteddate
+                        #expecteddateinput="ngModel" id="expecteddate" required>
+                      <span style="color: red" class="help-block" *ngIf="expected_date=='' && formEditWork._submitted">
+                        Hãy nhập ngày bắt đầu</span>
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Thời gian bắt đầu</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" [ngModel]="start_date" (blur)="start_date = startdate.value" name="start_date" #startdate #startdateinput="ngModel"
+                        id="startdate" required>
+                      <span style="color: red" class="help-block" *ngIf="start_date=='' && formEditWork._submitted">
+                        Hãy nhập ngày bắt đầu</span>
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Thời gian kết thúc</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" [ngModel]="end_date" (blur)="end_date = enddate.value" name="end_date" #enddate #enddateinput="ngModel"
+                        id="enddate" required>
+                      <span style="color: red" class="help-block" *ngIf="end_date=='' && formEditWork._submitted">
+                        Hãy nhập ngày kết thúc</span>
+                    </div>
+                    <!-- div.input -->
+
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Chuyển giao công nghệ</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" [(ngModel)]="workEdit.technology_transfer" name="technology_transfer" required>
+                      <span style="color: red" class="help-block" *ngIf="workEdit.technology_transfer=='' && formEditWork._submitted">
+                        Hãy nhập nội dung chuyển giao công nghệ</span>
+                    </div>
+                    <!-- div.input -->
+
+                  </div>
+
+                  <div class="mr-bt-20"></div>
+                  <!-- div.mr-bt-20 -->
+                  <div class="tt-a">Thay đổi thông tin ngân sách</div>
+                  <!-- div.tt-a -->
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Tổng kinh phí</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]="this.workEdit.total_cost" required ngModel id="total_cost" name="total_cost" #total_cost="ngModel"
+                      />
+                    </div>
+                    <span style="color: red" class="help-block" *ngIf="this.workEdit.total_cost==null && formEditWork._submitted">
+                        Hãy nhập tổng kinh phí</span>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Nguồn ngân sách</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <select name="budget_source" id="budget_source" [(ngModel)]="budgetSourceSelected">
+                              <option *ngFor="let group of lstBudgetSource | slice:1" [ngValue]="group">{{group.text}}</option>
+											      </select>
+                      <div class="icon-select">
+                        <img src="assets/images/icon-select.png" alt="" />
+                      </div>
+                      <!-- div.icon-select -->
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Đơn vị tiền tệ</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <select name="unit_money" id="unit_money" [(ngModel)]="unitSelected">
+                              <option *ngFor="let group of lstUnit | slice:1" [ngValue]="group">{{group.text}}</option>
+											      </select>
+                      <div class="icon-select">
+                        <img src="assets/images/icon-select.png" alt="" />
+                      </div>
+                      <!-- div.icon-select -->
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Năm chuyển tiền</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]="this.workEdit.receive_amount_year" required ngModel id="receive_amount_year" name="receive_amount_year"
+                        #receive_amount="ngModel" />
+                    </div>
+                    <span style="color: red" class="help-block" *ngIf="this.workEdit.receive_amount_year==null && formEditWork._submitted">
+                        Hãy nhập năm chuyển tiền</span>
+                    <!-- div.input -->
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Kinh phí đã nhận</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]="this.workEdit.receive_amount" required ngModel id="receive_amount" name="receive_amount"
+                        #receive_amount="ngModel" />
+                    </div>
+                    <span style="color: red" class="help-block" *ngIf="this.workEdit.receive_amount==null && formEditWork._submitted">
+                        Hãy nhập tổng Kinh phí đã nhận</span>
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Kinh phí đã sử dụng</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" name="operating_amount" [(ngModel)]="this.workEdit.operating_amount" required ngModel id="operating_amount"
+                        name="operating_amount" #operating_amount="ngModel" />
+                    </div>
+                    <span style="color: red" class="help-block" *ngIf="this.workEdit.operating_amount==null && formEditWork._submitted">
+                        Hãy nhập tổng Kinh phí đã sử dụng</span>
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="mr-bt-20"></div>
+                  <!-- div.mr-bt-20 -->
+                  <div class="tt-a">Thông tin đào tạo</div>
+                  <!-- div.tt-a -->
+
+                  <div class="item">
+                    <div class="tt">Số lượng ĐH</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]=" workEdit.product_edu_dh" name="product_edu_dh">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Số lượng ThS</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]=" workEdit.product_edu_ths" name="product_edu_ths">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Số lượng CKII</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]=" workEdit.product_edu_ckii" name="product_edu_ckii">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Số lượng Khác</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]=" workEdit.product_edu_other" name="product_edu_other">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="mr-bt-20"></div>
+                  <!-- div.mr-bt-20 -->
+                  <div class="tt-a">Thông tin sản phẩm khoa học</div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Số lượng chuyên đề</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]=" workEdit.product_science_cd" name="product_science_cd">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Số lượng Quy trình</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]=" workEdit.product_science_qt" name="product_science_qt">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Số lượng Bài báo</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]=" workEdit.product_science_bb" name="product_science_bb">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Số lượng Sách</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]=" workEdit.product_science_sa" name="product_science_sa">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Số lượng Khác</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="number" [(ngModel)]=" workEdit.product_science_other" name="product_science_other">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                </div>
+                <!-- div.col-md-6 -->
+
+
+                <div class="col-md-6">
+                  <div class="tt-a">
+                    Thay đổi thông tin bổ sung
+                  </div>
+                  <!-- div.tt-a -->
+
+                  <div class="item">
+                    <div class="tt">Tiến độ đề tài</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <select name="status" id="status" [(ngModel)]="statusSelected">
+                              <option *ngFor="let group of lstStatus" [ngValue]="group">{{group.text}}</option>
+											      </select>
+                      <div class="icon-select">
+                        <img src="assets/images/icon-select.png" alt="" />
+                      </div>
+                      <!-- div.icon-select -->
+                    </div>
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="tt">Cấp độ đề tài</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <select name="level_work" id="level_work" [(ngModel)]="levelWorksSelected">
+                              <option *ngFor="let group of lstLevelWorks | slice:1" [ngValue]="group">{{group.text}}</option>
+											      </select>
+                      <div class="icon-select">
+                        <img src="assets/images/icon-select.png" alt="" />
+                      </div>
+                      <!-- div.icon-select -->
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Xếp loại đề tài</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <select name="rank_work" id="rank_work" [(ngModel)]="rankWorksSelected">
+                              <option *ngFor="let group of lstRankWorks | slice:1" [ngValue]="group">{{group.text}}</option>
+											      </select>
+                      <div class="icon-select">
+                        <img src="assets/images/icon-select.png" alt="" />
+                      </div>
+                      <!-- div.icon-select -->
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Lĩnh vực nghiên cứu</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <select name="research_area" id="research_area" [(ngModel)]="researchAreaSelected">
+                              <option *ngFor="let group of lstresearchArea | slice:1" [ngValue]="group">{{group.text}}</option>
+											      </select>
+                      <div class="icon-select">
+                        <img src="assets/images/icon-select.png" alt="" />
+                      </div>
+                      <!-- div.icon-select -->
+                    </div>
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="mr-bt-20"></div>
+                  <br>
+                  <!-- div.mr-bt-20 -->
+
+                  <div class="tt-a">Hội đồng đạo đức</div>
+
+                  <div class="item">
+                    <div class="tt">Kết quả</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <select name="ethical_assembly" id="ethical_assembly" [(ngModel)]="ethicalAssemblySelected">
+                              <option *ngFor="let group of lstEthicalAssembly | slice:1" [ngValue]="group">{{group.text}}</option>
+											      </select>
+                      <div class="icon-select">
+                        <img src="assets/images/icon-select.png" alt="" />
+                      </div>
+                      <!-- div.icon-select -->
+                    </div>
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Số, ngày/tháng/năm bản chấp thuận</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" ngModel [(ngModel)]=" workEdit.ethical_assembly_date" name="ethicalAssemblyDate" #ethicalAssemblyDate="ngModel">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Ngày họp HĐ Đạo đức (Quy trình đầy đủ)</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" [ngModel]="ethical_assembly_date_meeting" (blur)="ethical_assembly_date_meeting = ethicalassemblydatemeeting.value"
+                        name=" workEdit" #ethicalassemblydatemeeting #ethicalassemblydatemeetinginput="ngModel" id="ethicalassemblydatemeeting">
+                      <!-- div.input -->
+                    </div>
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Các thành viên HĐ tham dự</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" ngModel [(ngModel)]=" workEdit.ethical_assembly_member" name="ethicalAssemblyMember" #ethicalAssemblyMember="ngModel">
+                    </div>
+
+                    <!-- div.input -->
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Ngày tổng hợp biên bản góp ý (quy trình đầy đủ)</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" [ngModel]="ethical_assembly_date_summary" (blur)="ethical_assembly_date_summary = ethicalassemblydatesummary.value"
+                        name="ethical_assembly_date_summary" #ethicalassemblydatesummary #ethicalassemblydatesummaryinput="ngModel"
+                        id="ethicalassemblydatesummary">
+                      <!-- div.input -->
+                    </div>
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Ủy viên nhận xét</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <textarea ngModel [(ngModel)]=" workEdit.ethical_assembly_comment" name="ethical_assembly_comment"></textarea>
+                    </div>
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="mr-bt-20"></div>
+                  <!-- div.mr-bt-20 -->
+
+                  <div class="tt-a">Các quyết định đề tài</div>
+
+                  <div class="item">
+                    <div class="tt">Số Quyết định phê duyệt đề tài</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" ngModel [(ngModel)]=" workEdit.decided_works_approval" name="decidedWorksApproval" #decidedWorksApproval="ngModel">
+                    </div>
+
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Ngày ký quyết định</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" [ngModel]="decided_works_approval_date" (blur)="decided_works_approval_date = decidedworksapprovaldate.value"
+                        name="decided_works_approval_date" #decidedworksapprovaldate #decidedworksapprovaldateinput="ngModel"
+                        id="decidedworksapprovaldate">
+                      <!-- div.input -->
+                    </div>
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Cấp quyết định</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" ngModel [(ngModel)]=" workEdit.decided_works_approval_level" name="decidedWorksApprovalLevel" #decidedWorksApprovalLevel="ngModel">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Số Quyết định nghiệm thu đề tài</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" ngModel [(ngModel)]=" workEdit.decided_works_acceptance" name="decidedWorksacceptance" #decidedWorksacceptance="ngModel">
+                    </div>
+
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Ngày ký quyết định nghiệm thu</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" [ngModel]="decided_works_acceptance_date" (blur)="decided_works_acceptance_date = decidedworksacceptancedate.value"
+                        name="decided_works_acceptance_date" #decidedworksacceptancedate #decidedworksacceptancedateinput="ngModel"
+                        id="decidedworksacceptancedate">
+                      <!-- div.input -->
+                    </div>
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Cấp quyết định nghiệm thu</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" ngModel [(ngModel)]=" workEdit.decided_works_acceptance_level" name="decidedWorksacceptanceLevel" #decidedWorksacceptanceLevel="ngModel">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Số Quyết định công nhận kết quả nghiệm thu của các cơ sở khác</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" ngModel [(ngModel)]=" workEdit.decided_works_acceptance_off" name="decidedWorksacceptance_off" #decidedWorksacceptance_off="ngModel">
+                    </div>
+
+                    <!-- div.input -->
+                  </div>
+                  <!-- div.item -->
+                  <div class="item">
+                    <div class="tt">Ngày ký quyết định</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" [ngModel]="decided_works_acceptance_off_date" (blur)="decided_works_acceptance_off_date = decidedworksacceptanceoffdate.value"
+                        name="decided_works_acceptance_off_date" #decidedworksacceptanceoffdate #decidedworksacceptanceoffdate="ngModel"
+                        id="decidedworksacceptanceoffdate">
+                      <!-- div.input -->
+                    </div>
+                  </div>
+
+                  <div class="item">
+                    <div class="tt">Cấp quyết định</div>
+                    <!-- div.tt -->
+                    <div class="input">
+                      <input type="text" ngModel [(ngModel)]=" workEdit.decided_works_acceptance_off_level" name="decidedWorksacceptanceOffLevel"
+                        #decidedWorksacceptanceOffLevel="ngModel">
+                    </div>
+                    <!-- div.input -->
+                  </div>
+
+                  <!-- div.item -->
+                  <div class="mr-bt-20"></div>
+                  <!-- div.mr-bt-20 -->
+
+                  <div class="tt-a">Thay đổi thông tin người tham gia</div>
+                  <!-- div.tt-a -->
+                  <ul class="nav nav-tabs cus" role="tablist">
+                    <li role="presentation" class="active">
+                      <a href="#baibao" aria-controls="baibao" role="tab" data-toggle="tab">Chủ nhiệm</a>
+                    </li>
+                    <li role="presentation" class="">
+                      <a href="#diemso" aria-controls="diemso" role="tab" data-toggle="tab">Thành viên đề tài</a>
+                    </li>
+
+                  </ul>
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="baibao">
+                      <div class="bao-all-nhapten">
+                          <div class="ten" style="display: none"></div>
+                          <div class="ten" *ngFor="let ch of this.workEdit.cochair;index as ir" style="margin-bottom: 5px">
+                            <div class="img-main-radius">
+                              <img [(src)]="ch.linkAvar" alt="" *ngIf="ch.linkAvar !== undefined" />
+                              <img src="assets/images/img-bs.jpg" alt="" *ngIf="ch.linkAvar === undefined" />
+                            </div>
+                            <!-- div.img-main-radius -->
+                            <span>{{ ch.fullname }} ({{ ch.username }})</span>
+                            <span class="nut" (click)="removeCochair(ir)"></span>
+                          </div>
+                          <!-- div.ten -->
+
+                          <textarea cols="50" rows="5" class="cusTa" id="cocharCurr" name="cocharCurr" (keyup)="saveChange($event)"></textarea>
+                        <!-- div.head -->
+
+                        <div class="list-sl">
+                          <div class="it" *ngFor="let co of this.cochairSuggest">
+                            <div class="trai">
+                              <div class="ten">
+                                <div class="img-main-radius">
+                                  <img [(src)]="co.linkAvar" alt="" />
+                                </div>
+                                <!-- div.img-main-radius -->
+                                <span name="cochairName">{{ co.fullname}} ({{ co.username }})</span>
+                                <!--<input [(ngModel)]="co.fullname[i]">-->
+                              </div>
+                              <!-- div.ten -->
+
+                            </div>
+                            <div class="phai">
+                              <div class="input">
+                                <a class="btn-add">
+																			<img src="assets/images/icon-add1.png" alt="{{ co.username}}" (click)="addCochair(co)"/>
+																		</a>
+                              </div>
+                              <!-- div.input -->
+
+                            </div>
+                            <!-- div.phai -->
+
+                            <div class="clear"></div>
+                            <!-- div.clear -->
+                          </div>
+                          <!-- div.it -->
+                        </div>
+                        <!-- div.list-sl -->
+
+                      </div>
+                      <!-- div.bao-all-nhapten -->
+
+                    </div>
+                    <!-- end tabpanel -->
+
+                    <div role="tabpanel" class="tab-pane " id="diemso">
+                      <div class="bao-all-nhapten">
+                          <div class="ten" style="display: none"></div>
+                          <div class="ten" *ngFor="let mem of this.workEdit.members;index as ir" style="margin-bottom: 5px">
+                            <div class="img-main-radius">
+                              <img [(src)]="mem.linkAvar" alt="" *ngIf="mem.linkAvar !== undefined" />
+                              <img src="assets/images/img-bs.jpg" alt="" *ngIf="mem.linkAvar === undefined" />
+                            </div>
+                            <!-- div.img-main-radius -->
+                            <span>{{ mem.fullname }} ({{ mem.username }})</span>
+                            <span class="nut" (click)="removeMem(ir)"></span>
+                          </div>
+                          <!-- div.ten -->
+                          <textarea cols="50" rows="5" class="cusTa" id="memCurr" name="memCurr" (keyup)="saveChangeMem($event)"></textarea>
+                        <!-- div.head -->
+
+                        <div class="list-sl">
+                          <div class="it" *ngFor="let co of this.memberSuggest">
+                            <div class="trai">
+                              <div class="ten">
+                                <div class="img-main-radius">
+                                  <img [(src)]="co.linkAvar" alt="" />
+                                </div>
+                                <!-- div.img-main-radius -->
+                                <span name="cochairName">{{ co.fullname}} ({{ co.username }})</span>
+                              </div>
+                              <!-- div.ten -->
+                            </div>
+                            <div class="phai">
+                              <div class="input">
+                                <a class="btn-add">
+																			<img src="assets/images/icon-add1.png" alt="{{ co.username }}" (click)="addMember(co)"/>
+																		</a>
+                              </div>
+                              <!-- div.input -->
+                            </div>
+                            <!-- div.phai -->
+                            <div class="clear"></div>
+                            <!-- div.clear -->
+                          </div>
+                          <!-- div.it -->
+                        </div>
+
+                        <!-- div.list-sl -->
+                      </div>
+                      <!-- div.bao-all-nhapten -->
+                    </div>
+                    <!-- end tabpanel -->
+                  </div>
+                  <!-- end tab-content -->
+                  <span style="color: red" class="help-block" *ngIf="isCochair">
+                        {{ cocharMess }}</span>
+                  <!-- div.col-md-6 -->
+
+                  <div class="mr-bt-20"></div>
+                  <div class="tt">Thông tin người mới nhập không có trong hệ thống</div>
+
+                  <br>
+
+                  <div class="item" *ngFor="let nonSys of temp;index as ir">
+                    <div class="list-name-ten">
+                      <div class="li">
+                        <div class="img-main-radius">
+                          <img src="assets/images/img-bs.jpg" alt="">
+                        </div><span>{{ nonSys.fullname }}</span>
+
+                      </div>
+                      <!-- div.li -->
+                    </div>
+                    <div class="input">
+                      Giới tính
+                      <input type="radio" name="nam{{ir}}" id="nam{{ir}}" value="1" [(ngModel)]="nonSys.gender" required>
+                      <label for="nam{{ir}}">Nam</label>
+                      <input type="radio" name="nu{{ir}}" id="nu{{ir}}" value="2" [(ngModel)]="nonSys.gender" required>
+                      <label for="nu{{ir}}">Nữ</label>
+                      <!-- div.input -->
+                    </div>
+                    <div class="input">
+                      Email
+                      <input type="text" name="nameAAA" [(ngModel)]="nonSys.email">
+                      <!-- div.input -->
+                    </div>
+                    <!-- <span style="color: red" class="help-block" *ngIf="nonSys.gender===undefined && formRegisterWork3._submitted">
+                        Hãy chọn giới tính</span> -->
+                  </div>
+                </div>
+
+              </div>
+              <!-- div.row cus-15 -->
+              <div class="main-btn-aqua li-btn-media">
+                <button #btsubmit1 type="submit" style="visibility:hidden">AA</button>
+                <a style="cursor: pointer" class="btn-blue to xam" (click)="updateCancel()">HỦY BỎ</a>
+                <a class="btn-blue to" (click)="btsubmit1.click()" style="cursor: pointer">CẬP NHẬT</a>
+              </div>
+              <!-- div.main-btn-aqua -->
+            </div>
+            <!-- div.main-form4 -->
+          </div>
+          <!-- div.main-bg-white1 -->
+        </div>
+        <!-- div.col-md-10 col-md-offset-1 -->
+      </div>
+      <!-- div.row -->
+    </div>
+  </form>
+  <!-- div.container -->
+</div>
+<!-- div.bao-all-main-content -->

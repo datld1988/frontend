@@ -1,0 +1,794 @@
+<div class="bao-all-main-content" *ngIf="isLoadingPage">
+  <div class="container">
+    <div class="row cus-20">
+
+      <div class="col-md-8 col-md-offset-2">
+
+        <div class="main-nav-breakcrumb">
+          <ul>
+            <li>
+              <a [routerLink]="['/']">Trang chủ</a>
+            </li>
+            <li>&rsaquo;</li>
+            <li><a href=""><a [routerLink]="['/dang-ky-de-tai']">Tạo đề tài</a></a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- div.main-nav-breakcrumb -->
+
+        <!--Bắt đàu form 1-->
+        <form name="formRegisterWork1" #formRegisterWork1="ngForm" (ngSubmit)="onSubmit(2)" *ngIf="step === 1">
+          <div class="main-bg-pd cus">
+            <div class="main-detai">
+              <div class="media">
+                <div class="media-body">
+                  <div class="tt-main-to">
+                    {{ registerWorksLabel.WORK_PAGE1_TITLE1 }}
+                  </div>
+                  <!-- div.tt-main-to -->
+                  <div class="des-a">{{ registerWorksLabel.WORK_PAGE1_TITLE2 }}</div>
+                  <!-- div.des-a -->
+
+                  <div class="form">
+
+                    <div class="item">
+                      <div class="tt">{{ registerWorksLabel.WORK_NAME }}</div>
+                      <!-- div.tt -->
+                      <div class="input">
+                        <input type="text" required ngModel [(ngModel)]="workRegister.name" name="workName" #workName="ngModel">
+                        <span style="color: red" class="help-block" *ngIf="workRegister.name =='' && formRegisterWork1._submitted">Hãy nhập tên đề tài</span>
+
+                      </div>
+                      <!-- div.input -->
+                    </div>
+                    <!-- div.item -->
+
+                    <div class="item">
+                      <div class="tt">Tổ chức chủ trì thực hiện</div>
+                      <!-- div.tt -->
+                      <div class="input">
+                        <input type="text" required ngModel [(ngModel)]="workRegister.org_impl" name="orgImpl" #orgImpl="ngModel">
+                        <span style="color: red" class="help-block" *ngIf="workRegister.org_impl =='' && formRegisterWork1._submitted">Hãy nhập Tổ chức chủ trì thực hiện</span>
+
+                      </div>
+                      <!-- div.input -->
+                    </div>
+                    <!-- div.item -->
+
+                    <div class="item">
+                      <div class="tt">Tổ chức phối hợp thực hiện</div>
+                      <!-- div.tt -->
+                      <div class="input">
+                        <input type="text" required ngModel [(ngModel)]="workRegister.org_coo_impl" name="orgCooImpl" #orgCooImpl="ngModel">
+                        <span style="color: red" class="help-block" *ngIf="workRegister.org_coo_impl =='' && formRegisterWork1._submitted">Hãy nhập Tổ chức phối hợp thực hiện</span>
+
+                      </div>
+                      <!-- div.input -->
+                    </div>
+                    <!-- div.item -->
+
+                    <div class="item">
+                      <div class="tt">Nước phối hợp thực hiện</div>
+                      <!-- div.tt -->
+                      <div class="input">
+                        <input type="text" required ngModel [(ngModel)]="workRegister.country_impl" name="countryImpl" #countryImpl="ngModel">
+                        <span style="color: red" class="help-block" *ngIf="workRegister.country_impl =='' && formRegisterWork1._submitted">Hãy nhập Nước phối hợp thực hiện</span>
+
+                      </div>
+                      <!-- div.input -->
+                    </div>
+                    <!-- div.item -->
+
+                    <div class="item">
+                      <div class="tt">{{ registerWorksLabel.WORK_TARGET }}</div>
+                      <!-- div.tt -->
+                      <div class="input">
+                        <textarea required ngModel name="workTarget" #workTarget="ngModel" id="workTarget" cols="30" rows="6" [(ngModel)]="workRegister.goal_completion"></textarea>
+                        <span style="color: red" class="help-block" *ngIf="workRegister.goal_completion =='' && formRegisterWork1._submitted">Hãy nhập mục tiêu đề tài</span>
+                      </div>
+                      <!-- div.input -->
+                    </div>
+                    <!-- div.item -->
+
+                    <div class="item">
+                      <div class="tt">Nguồn ngân sách</div>
+                      <!-- div.tt -->
+                      <div class="input">
+                        <select name="budget_source" id="budget_source" [(ngModel)]="budgetSourceSelected">
+                                <option *ngFor="let group of lstBudgetSource" [ngValue]="group">{{group.text}}</option>
+                              </select>
+                        <div class="icon-select">
+                          <img src="assets/images/icon-select.png" alt="" />
+                        </div>
+                        <!-- div.icon-select -->
+                      </div>
+                      <span style="color: red" class="help-block" *ngIf="budgetSourceSelected.value=='' && formRegisterWork1._submitted">
+                          Hãy chọn nguồn ngân sách</span>
+                      <!-- div.input -->
+                    </div>
+                    <!-- div.item -->
+                    <div class="row cus-15">
+                      <div class="col-md-7">
+                        <div class="item">
+                          <div class="tt">Tổng kinh phí</div>
+                          <!-- div.tt -->
+                          <div class="input">
+                            <input type="number" required ngModel #total_cost="ngModel" name="total_cost" [(ngModel)]="this.workRegister.total_cost"
+                            />
+                          </div>
+                          <span style="color: red" class="help-block" *ngIf="this.workRegister.total_cost==null && formRegisterWork1._submitted">
+                          Hãy chọn tổng kinh phí của đề tài</span>
+                          <!-- div.input -->
+
+                        </div>
+                        <!-- div.item -->
+                      </div>
+                      <!-- div.col-md-8 -->
+                      <div class="col-md-5">
+                        <div class="item">
+                          <div class="tt">Đơn vị</div>
+                          <!-- div.tt -->
+                          <div class="input have_tool">
+                            <select name="unit_money" id="unit_money" [(ngModel)]="unitMoneySelected">
+                                <option *ngFor="let group of lstUnitMoney" [ngValue]="group">{{group.text}}</option>
+                              </select>
+                            <div class="icon-select">
+                              <img src="assets/images/icon-select.png" alt="" />
+                            </div>
+                            <!-- div.icon-select -->
+                          </div>
+                          <span style="color: red" class="help-block" *ngIf="this.unitMoneySelected.value=='' && formRegisterWork1._submitted">
+                          Hãy chọn đơn vị tiền tệ</span>
+                          <!-- div.input -->
+                        </div>
+                        <!-- div.item -->
+                      </div>
+                      <!-- div.col-md-8 -->
+                    </div>
+                    <!-- div.row -->
+
+                    <div class="item">
+                      <div class="tt">Số tháng thực hiện</div>
+                      <!-- div.tt -->
+                      <div class="input">
+                        <input type="number" required ngModel #month_perform="ngModel" name="month_perform" [(ngModel)]="this.workRegister.month_perform"
+                        />
+                      </div>
+                      <span style="color: red" class="help-block" *ngIf="this.workRegister.month_perform==null && formRegisterWork1._submitted">
+                          Hãy nhập số tháng thực hiện</span>
+                      <!-- div.input -->
+
+                    </div>
+
+                    <div class="item">
+                      <div class="tt">Lĩnh vực nghiên cứu</div>
+                      <!-- div.tt -->
+                      <div class="input">
+                        <select name="research_area" id="research_area" [(ngModel)]="researchAreaSelected">
+                            <option *ngFor="let group of lstresearchArea" [ngValue]="group">{{group.text}}</option>
+                        </select>
+                        <div class="icon-select">
+                          <img src="assets/images/icon-select.png" alt="" />
+                        </div>
+                        <!-- div.icon-select -->
+                      </div>
+                      <span style="color: red" class="help-block" *ngIf="this.researchAreaSelected.value=='' && formRegisterWork1._submitted">
+                          Hãy chọn lĩnh vực nghiên cứu</span>
+                      <!-- div.input -->
+                    </div>
+                    <!-- div.item -->
+
+                    <div class="item">
+                      <div class="tt">Cấp độ đề tài</div>
+                      <!-- div.tt -->
+                      <div class="input">
+                        <select name="level_works" id="level_works" [(ngModel)]="levelWorksSelected">
+                            <option *ngFor="let group of lstLevelWorks" [ngValue]="group">{{group.text}}</option>
+                        </select>
+                        <div class="icon-select">
+                          <img src="assets/images/icon-select.png" alt="" />
+                        </div>
+                        <!-- div.icon-select -->
+                      </div>
+                      <span style="color: red" class="help-block" *ngIf="this.levelWorksSelected.value=='' && formRegisterWork1._submitted">
+                          Hãy chọn cấp độ đề tài</span>
+                    </div>
+                    <div class="item" *ngIf="levelWorksSelected.value === 4">
+                      <!-- <div class="tt">Cấp độ đề tài</div> -->
+                      <div class="input">
+                        Tên đề tài cha:
+                        <ng-container *ngIf="this.workRegister.work_parent[1] === undefined" style="color: red">Chưa chọn đề tài cha</ng-container>
+                        <b><ng-container *ngIf="this.workRegister.work_parent[1] !== undefined" >{{ this.workRegister.work_parent[1] }}</ng-container> </b>
+                        <button type="button" class="btn primary" (click)="addWorkParent(1)">Thay đổi đề tài cha</button>
+                        <!-- div.icon-select -->
+                      </div>
+                      <span style="color: red" class="help-block" *ngIf="this.workRegister.work_parent?.length ===0 && formRegisterWork1._submitted">
+                          Hãy chọn đề tài cha</span>
+
+                    </div>
+                    <hr>
+
+                    <div class="input">
+                      Các tài liệu hiện có liên quan đến đề tài:
+
+                      <button type="button" class="btn primary" (click)="addWorkParent(2)">Thêm bài báo</button>
+                      <!-- div.icon-select -->
+                    </div>
+
+                    <div class="des-a" style="max-width: 420px">Danh sách tài liệu được thêm</div>
+
+                    <div class="main-table table-responsive">
+                      <table>
+                        <tr>
+                          <td>STT</td>
+                          <td>Ngày đăng tải</td>
+                          <td>Tên tài liệu</td>
+                          <td></td>
+                        </tr>
+                        <tr *ngIf="articleAdded?.length == 0">
+                          <br>
+                          <td colspan="4" style="align-content: center"><b>Không có tài liệu nào đã thực hiện liên quan đến đề tài</b></td>
+                        </tr>
+                        <tr *ngFor="let file of articleAdded;index as idx">
+                          <td>{{ idx + 1 }}</td>
+                          <td>{{ file.created_date | date: 'dd/MM/yyyy hh:MM' }}</td>
+                          <td style="text-align: justify">
+                            <a [routerLink]="['/chi-tiet-de-tai', file._id]" *ngIf="popupType === 1" >{{ file.name }}</a>
+                            <a [routerLink]="['/chi-tiet-bai-bao', file._id]" *ngIf="popupType === 2" >{{ file.name }}</a>
+                          </td>
+                          <td>
+                            <a style="cursor: pointer" class="func" (click)="removeArticleFromWork(file._id)">
+                                      <img src="assets/images/btn-close.png" alt=""/>
+                                    </a>
+                          </td>
+                        </tr>
+                      </table>
+
+                    </div>
+
+                    <br>
+
+
+
+                    <div class="item">
+                      <div class="phai-a">
+                        <button #btsubmit1 type="submit" style="visibility:hidden">{{ registerWorksLabel.WORK_CONTINUE }}</button>
+                        <a class="btn-blue to" (click)="btsubmit1.click()" href="javascript:;">{{ registerWorksLabel.WORK_CONTINUE }}</a>
+                      </div>
+                      <!-- div.phai-a -->
+                    </div>
+                    <!-- div.item -->
+                  </div>
+                  <!-- div.form -->
+                </div>
+                <!-- div.media-body -->
+                <div class="media-right hidden-xs">
+                  <div class="img-main-radius">
+                    <img src="assets/images/img-bs-big.jpg" alt="" />
+                  </div>
+                  <!-- div.img-avt -->
+                </div>
+                <!-- div.media-left -->
+              </div>
+              <!-- div.media -->
+            </div>
+            <!-- div.main-new-detai -->
+          </div>
+          <!-- div.main-bg-pd -->
+        </form>
+        <!-- div.col-md-10 col-md-offset-1 -->
+        <!--kết thúc form 1-->
+
+        <!--Bắt đàu form 2-->
+        <form name="formRegisterWork2" #formRegisterWork2="ngForm" (ngSubmit)="onSubmit(3)" *ngIf="step==2" (keydown.enter)="$event.preventDefault()">
+          <div class="main-bg-pd cus">
+            <div class="main-detai">
+              <div class="media no-overflow">
+                <div class="media-body">
+                  <div class="tt-main-to">
+                    Nghiên cứu về cách chữa bệnh HIV không thuốc?
+                  </div>
+                  <!-- div.tt-main-to -->
+                  <div class="des-a">Thêm đề tài bạn đang làm việc chúng tôi sẽ thực hiện lưu trữ giúp bạn</div>
+                  <!-- div.des-a -->
+                  <div class="form">
+
+
+                    <ul class="nav nav-tabs cus" role="tablist">
+                      <li role="presentation" class="active">
+                        <a href="#baibao" aria-controls="baibao" role="tab" data-toggle="tab">Chủ nhiệm</a>
+                      </li>
+                      <li role="presentation" class="">
+                        <a href="#diemso" aria-controls="diemso" role="tab" data-toggle="tab">Thành viên đề tài</a>
+                      </li>
+
+                    </ul>
+
+                    <div class="tab-content">
+                      <div role="tabpanel" class="tab-pane active" id="baibao">
+                        <div class="bao-all-nhapten">
+                            <div class="ten" style="display: none"></div>
+                            <div class="ten" *ngFor="let ch of this.workRegister.cochair;index as ir" style="margin-bottom: 5px">
+                              <div class="img-main-radius">
+                                <img [(src)]="ch.linkAvar" alt="" *ngIf="ch.linkAvar !== undefined" />
+                                <img src="assets/images/img-bs.jpg" alt="" *ngIf="ch.linkAvar === undefined" />
+
+                              </div>
+                              <!-- div.img-main-radius -->
+                              <span>
+                                  <ng-container *ngIf="ch.username === undefined">{{ ch.fullname }}</ng-container>
+                                  <ng-container *ngIf="ch.username !== undefined">{{ ch.fullname }} ({{ ch.username }})</ng-container>
+  
+                                </span>
+                              <span class="nut" (click)="removeCochair(ir)"></span>
+                            </div>
+                            <!-- div.ten -->
+
+                            <textarea class="cusTa" cols="30" rows="5" id="cocharCurr" name="cocharCurr" (keyup)="saveChange($event)"></textarea>
+                          <!-- div.head -->
+
+                          <div class="list-sl">
+                            <div class="it" *ngFor="let co of this.cochairSuggest">
+                              <div class="trai">
+                                <div class="ten">
+                                  <div class="img-main-radius">
+                                    <img [(src)]="co.linkAvar" alt="" />
+                                  </div>
+                                  <!-- div.img-main-radius -->
+                                  <span name="cochairName">{{ co.fullname}} ({{ co.username}})</span>
+                                  <!--<input [(ngModel)]="co.fullname[i]">-->
+                                </div>
+                                <!-- div.ten -->
+
+                              </div>
+                              <div class="phai">
+                                <div class="input">
+                                  <a class="btn-add">
+                                                                          <img src="assets/images/icon-add1.png" alt="{{ co.username}}" (click)="addCochair(co)" />
+                                                                      </a>
+                                </div>
+                                <!-- div.input -->
+
+                              </div>
+                              <!-- div.phai -->
+
+                              <div class="clear"></div>
+                              <!-- div.clear -->
+                            </div>
+                            <!-- div.it -->
+                          </div>
+                          <!-- div.list-sl -->
+                          <div class="tool_tip">
+                            Nếu người tham gia chưa có trong cổng CNTT bạn có thể điền tên người đó và ấn Enter
+                          </div>
+                          <!-- div.tool_tip -->
+                        </div>
+                        <!-- div.bao-all-nhapten -->
+
+                      </div>
+                      <!-- end tabpanel -->
+
+                      <div role="tabpanel" class="tab-pane " id="diemso">
+                        <div class="bao-all-nhapten">
+                            <div class="ten" style="display: none"></div>
+                            <div class="ten" *ngFor="let mem of this.workRegister.members;index as ir" style="margin-bottom: 5px">
+                              <div class="img-main-radius">
+                                <img [(src)]="mem.linkAvar" alt="" *ngIf="mem.linkAvar !== undefined" />
+                                <img src="assets/images/img-bs.jpg" alt="" *ngIf="mem.linkAvar === undefined" />
+                              </div>
+                              <!-- div.img-main-radius -->
+                              <span>
+                                  <ng-container *ngIf="mem.username === undefined">{{ mem.fullname }}</ng-container>
+                                  <ng-container *ngIf="mem.username !== undefined">{{ mem.fullname }} ({{ mem.username }})</ng-container>
+  
+                                </span>
+                              <span class="nut" (click)="removeMem(ir)"></span>
+                            </div>
+                            <!-- div.ten -->
+                            <textarea cols="30" rows="5" class="cusTa" id="memCurr" name="memCurr" (keyup)="saveChangeMem($event)"></textarea>
+                          <!-- div.head -->
+
+                          <div class="list-sl">
+                            <div class="it" *ngFor="let co of this.memberSuggest">
+                              <div class="trai">
+                                <div class="ten">
+                                  <div class="img-main-radius">
+                                    <img [(src)]="co.linkAvar" alt="" />
+                                  </div>
+                                  <!-- div.img-main-radius -->
+                                  <span name="cochairName">{{ co.fullname}} ({{ co.username}})</span>
+                                </div>
+                                <!-- div.ten -->
+
+                              </div>
+                              <div class="phai">
+                                <div class="input">
+                                  <a class="btn-add">
+                                                                          <img src="assets/images/icon-add1.png" alt="{{ co.username }}" (click)="addMember(co)" />
+                                                                      </a>
+                                </div>
+                                <!-- div.input -->
+
+                              </div>
+                              <!-- div.phai -->
+
+                              <div class="clear"></div>
+                              <!-- div.clear -->
+                            </div>
+                            <!-- div.it -->
+
+                          </div>
+                          <!-- div.list-sl -->
+                          <div class="tool_tip">
+                            Nếu người tham gia chưa có trong cổng CNTT bạn có thể điền tên người đó và ấn Enter
+                          </div>
+                          <!-- div.tool_tip -->
+                        </div>
+                        <!-- div.bao-all-nhapten -->
+
+                      </div>
+                      <!-- end tabpanel -->
+                      <span style="color: red" class="help-block" *ngIf="isCochair">
+                          {{ cocharMess }}</span>
+                    </div>
+                    <!-- end tab-content -->
+
+                    <div class="item" style="margin-top: 20px">
+                      <div class="phai-a">
+                        <button #btsubmit2 type="submit" style="visibility:hidden">{{ registerWorksLabel.WORK_CONTINUE }}</button>
+                        <a class="btn-blue xam to" (click)="onSubmit(1)" href="javascript:;">QUAY LẠI </a>
+                        <a class="btn-blue to" (click)="btsubmit2.click()" href="javascript:;">HOÀN THÀNH</a>
+                      </div>
+                      <!-- div.phai-a -->
+                    </div>
+                    <!-- div.item -->
+                  </div>
+                  <!-- div.form -->
+                </div>
+                <!-- div.media-body -->
+                <div class="media-right hidden-xs">
+                  <div class="img-main-radius">
+                    <img src="assets/images/img-bs-big.jpg" alt="" />
+
+                  </div>
+                  <!-- div.img-avt -->
+                </div>
+                <!-- div.media-left -->
+              </div>
+              <!-- div.media -->
+            </div>
+            <!-- div.main-new-detai -->
+          </div>
+          <!-- div.main-bg-pd -->
+          <!-- div.main-bg-pd -->
+        </form>
+        <!-- div.col-md-10 col-md-offset-1 -->
+        <!--kết thúc form 2-->
+
+        <!--bắt đầu form 3-->
+        <form name="formRegisterWork3" #formRegisterWork3="ngForm" (ngSubmit)="onSubmit(5)" *ngIf="step==4" (keydown.enter)="$event.preventDefault()">
+          <div class="main-bg-pd cus">
+            <div class="main-detai">
+              <div class="media no-overflow">
+                <div class="media-body">
+                  <div class="tt-main-to">
+                    Thêm file tài liệu vào trong đề tài.
+                  </div>
+                  <!-- div.tt-main-to -->
+                  <!-- <div class="des-a" style="max-width: 420px">
+                      Lựa ch</div> -->
+                  <!-- div.des-a -->
+
+                  <div class="form">
+
+                    <div class="item">
+                      Ghi chú <br>
+                      <textarea cols="40" rows="3" name="comment"></textarea>
+                    </div>
+                    <!-- div.item -->
+
+                    <div class="item">
+                      <!-- div.tt-a -->
+                      <div class="des2">Hệ thống chấp nhận file: Word, excel, pdf, png, jpg</div>
+                      <!-- div.des2 -->
+
+                      <div class="custom-file-upload">
+                        <!--<label for="file">File: </label>-->
+                        <input type="file" id="fileUpload" (change)="changeListener($event)" name="file" />
+                      </div>
+                    </div>
+                    <!-- div.item -->
+
+                    <span style="color: red" class="help-block" *ngIf="validateFile">
+                        {{ fileMess }}</span>
+
+                    <div class="item phai-a">
+                      <a class="btn-blue to" (click)="saveFile()" href="javascript:;">LƯU TÀI LIỆU</a>
+                    </div>
+
+
+
+                    <hr>
+                    <div class="des-a">Danh sách file đã tải lên</div>
+
+                    <div class="item">
+                      <div class="main-table table-responsive">
+                        <table>
+                          <tr>
+                            <td>STT</td>
+                            <td>Ngày đăng tải</td>
+                            <td>File</td>
+                            <td class="trai-a">Ghi chú</td>
+                            <td></td>
+                          </tr>
+                          <tr *ngIf="files?.length == 0">
+                            <br>
+                            <td colspan="4" style="align-content: center"><b>Không có tài liệu nào trong đề tài</b></td>
+                          </tr>
+                          <tr *ngFor="let file of files;index as idx">
+                            <td>{{ idx + 1 }}</td>
+                            <td>{{ file.created | date: 'dd/MM/yyyy hh:MM' }}</td>
+                            <td>
+                              <!-- <a style="cursor: pointer" class="link" name="file-name" (click)="downloadFile(file._id)">{{ file.filename }}</a> -->
+                              <a style="cursor: pointer" class="link" name="file-name">{{ file.filename }}</a>
+                            </td>
+                            <td class="trai-a">
+                              <div class="nghiencuu"> {{ file.description }} </div>
+                              <!-- div.nghiencuu -->
+                            </td>
+                            <td>
+                              <a style="cursor: pointer" class="func" (click)="removeFile(idx)">
+                                        <img src="assets/images/btn-close.png" alt="" />
+                                      </a>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </div>
+                    </div>
+
+                    <span style="color: red" class="help-block" *ngIf="this.files?.length === 0 && formRegisterWork3._submitted">
+                        Vui lòng đính kèm đề cương</span>
+
+                    <div class="item" style="margin-top: 20px">
+                      <div class="phai-a">
+                        <button #btsubmit3 type="submit" style="visibility:hidden">{{ registerWorksLabel.WORK_CONTINUE }}</button>
+                        <a class="btn-blue xam to" (click)="goBack()" href="javascript:;">QUAY LẠI </a>
+                        <a class="btn-blue to" (click)="btsubmit3.click()" href="javascript:;">HOÀN THÀNH</a>
+                      </div>
+                      <!-- div.phai-a -->
+                    </div>
+                    <!-- div.item -->
+
+
+                  </div>
+                  <!-- div.form -->
+
+
+                </div>
+                <!-- div.media-body -->
+
+
+                <div class="media-right hidden-xs">
+                  <div class="img-main-radius">
+                    <img src="assets/images/img-bs-big.jpg" alt="" />
+
+                  </div>
+                  <!-- div.img-avt -->
+                </div>
+                <!-- div.media-left -->
+              </div>
+              <!-- div.media -->
+            </div>
+            <!-- div.main-new-detai -->
+          </div>
+        </form>
+        <!-- div.main-bg-pd -->
+        <!--kết thúc form 3-->
+
+
+        <!--bắt đầu form 3-->
+        <form name="formRegisterWork3" #formRegisterWork3="ngForm" (ngSubmit)="onSubmit(4)" *ngIf="step==3" (keydown.enter)="$event.preventDefault()">
+          <div class="main-bg-pd cus">
+            <div class="main-detai">
+              <div class="media no-overflow">
+                <div class="media-body">
+                  <div class="tt-main-to">
+                    Một số thành viên không trong hệ thống ?
+                  </div>
+                  <!-- div.tt-main-to -->
+                  <div class="des-a" style="max-width: 420px">Nhập email của các thành viên không có trong hệ thống để nhanh chóng mời họ tham gia cùng bạn</div>
+                  <!-- div.des-a -->
+
+                  <div class="form">
+                    <div class="item" *ngFor="let nonSys of temp">
+                      <div class="list-name-ten">
+                        <div class="li">
+                          <div class="img-main-radius">
+                            <img src="assets/images/img-bs.jpg" alt="">
+                          </div><span>{{ nonSys.fullname }}</span>
+
+                        </div>
+                        <!-- div.li -->
+                      </div>
+                      <div class="input">
+                        Giới tính
+                        <input type="radio" name="{{ nonSys.id }}" id="nam{{ nonSys.id }}" value="1" [(ngModel)]="nonSys.gender" required>
+                        <label for="nam{{ nonSys.id }}">Nam</label>
+                        <input type="radio" name="{{ nonSys.id }}" id="nu{{ nonSys.id }}" value="2" [(ngModel)]="nonSys.gender" required>
+                        <label for="nu{{ nonSys.id }}">Nữ</label>
+                        <!-- div.input -->
+                      </div>
+                      <div class="input">
+                        Email
+                        <input type="text" name="name" [(ngModel)]="nonSys.email">
+                        <!-- div.input -->
+                      </div>
+                      <span style="color: red" class="help-block" *ngIf="nonSys.gender===undefined && formRegisterWork3._submitted">
+                          Hãy chọn giới tính</span>
+                    </div>
+                    <!-- div.item -->
+
+
+                    <div class="item" style="margin-top: 20px">
+                      <div class="phai-a">
+                        <button #btsubmit3 type="submit" style="visibility:hidden">{{ registerWorksLabel.WORK_CONTINUE }}</button>
+                        <a class="btn-blue xam to" (click)="onSubmit(2)" href="javascript:;">QUAY LẠI </a>
+                        <!-- <a class="btn-blue xam to" (click)="onSubmit(4)" href="javascript:;">BỎ QUA </a> -->
+                        <a class="btn-blue to" (click)="btsubmit3.click()" href="javascript:;">{{ registerWorksLabel.WORK_CONTINUE }}</a>
+                      </div>
+                      <!-- div.phai-a -->
+                    </div>
+                    <!-- div.item -->
+
+
+                  </div>
+                  <!-- div.form -->
+
+
+                </div>
+                <!-- div.media-body -->
+
+
+                <div class="media-right hidden-xs">
+                  <div class="img-main-radius">
+                    <img src="assets/images/img-bs-big.jpg" alt="" />
+
+                  </div>
+                  <!-- div.img-avt -->
+                </div>
+                <!-- div.media-left -->
+              </div>
+              <!-- div.media -->
+            </div>
+            <!-- div.main-new-detai -->
+          </div>
+        </form>
+        <!-- div.main-bg-pd -->
+        <!--kết thúc form 3-->
+
+
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="addBaibao" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="main-baocao">
+          <div class="trai">
+            <div class="tt" *ngIf="popupType === 1">Thêm đề tài cha vào đề tài của bạn</div>
+            <div class="tt" *ngIf="popupType === 2">Thêm bài báo vào đề tài của bạn</div>
+            <!-- div.tt -->
+
+          </div>
+          <!-- div.trai -->
+          <div class="clear"></div>
+          <!-- div.clear -->
+
+          <!-- <div class="des">Nhập tên đề tài bạn muốn tìm kiếm</div> -->
+          <!-- div.des -->
+
+          <!-- <div class="input search search-left"> -->
+
+            <!-- <input type="text" name="articleCondition" placeholder="Tìm kiếm...."> -->
+            <!-- <a style="cursor: pointer" (click)="searchingArrticle()" class="search"><img src="assets/images/icon-search.png" alt=""></a> -->
+
+          <!-- </div> -->
+          <!-- end input-search -->
+
+        </div>
+        <!-- div.main-baocao -->
+
+        <div class="main-list-detai-nghiencuu cus">
+
+          <div class="item" *ngFor="let ar of lstWorks">
+
+            <div class="row cus-15">
+
+              <div class="col-sm-3" style="align-items: center">
+
+                <div class="img hot">
+                  <img src="assets/images/chungnhan.png" alt="" />
+
+                </div>
+
+
+                <!-- div.img -->
+
+
+              </div>
+              <!-- div.col-sm-3 col-sm-pull-9 -->
+
+              <div class="col-sm-9">
+                <div class="tt-a">
+                  <a [routerLink]="['/chi-tiet-de-tai', ar._id]" *ngIf="popupType === 1"> {{ ar.name }}</a>
+                  <a [routerLink]="['/chi-tiet-bai-bao', ar._id]" *ngIf="popupType === 2"> {{ ar.name }}</a>
+                </div>
+                <!-- div.tt-a -->
+
+                <div class="des">
+                  <a style="cursor: pointer" class="cat">Đề tài</a>
+                  <div class="date">Tháng {{ ar.created_date | date: 'MM/yyyy' }} - {{ fullname }}</div>
+                  <!-- div.date -->
+                </div>
+                <!-- div.des -->
+
+                <div class="except">
+                    <ng-container *ngIf="popupType === 1">{{ ar.goal_completion }}</ng-container>
+                    <ng-container *ngIf="popupType === 2">{{ ar.summary }}</ng-container>
+                </div>
+                <!-- div.except -->
+
+
+
+              </div>
+              <!-- div.col-sm-9 -->
+
+            </div>
+            <!-- div.row cus-15 -->
+
+            <div class="input new-nut" id="{{ ar._id }}" *ngIf="ar.status === 0" >
+              <div class="btn-add" name="divAddOne">
+                <img src="assets/images/icon-add1.png" alt="Thêm bài báo vào đề tài" (click)="addTemWork(ar)" *ngIf="popupType === 1"/>
+                <img src="assets/images/icon-add1.png" alt="Thêm bài báo vào đề tài" (click)="addTemArticle(ar, $event)" *ngIf="popupType === 2"/>
+              </div>
+            </div>
+            <!-- div.input -->
+          </div>
+          <!-- div.item -->
+
+
+          <div class="phai-a" *ngIf="this.limitWork < this.totalWork" >
+            <div class="main-nav-page">
+              <app-pagination [offset]="(pageWork-1)*limitWork" [limit]="limitWork" [size]="totalWork" (pageChange)="getWorks($event)"></app-pagination>
+            </div>
+            <!-- div.main-nav-page -->
+          </div>
+          <!-- div.phai-a -->
+
+        </div>
+        <!-- div.main-list-detai-nghiencuu -->
+
+        <div class="mr-bt-20"></div>
+        <!-- div.mr-bt-20 -->
+        <div class="main-btn-aqua li-btn-media">
+          <a style="cursor: pointer" class="btn-blue xam to" (click)="close()">HỦY LỆNH</a>
+          <!-- <a style="cursor: pointer" class="btn-blue to" (click)="addWorkToWork()" *ngIf="popupType === 1">CẬP NHẬT</a> -->
+          <a style="cursor: pointer" class="btn-blue to" (click)="addArticleToWork()" *ngIf="popupType === 2">CẬP NHẬT</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- end modal-content -->
+
+  </div>
+</div>

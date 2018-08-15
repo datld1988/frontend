@@ -1,0 +1,102 @@
+<nav class="cd-nav">
+  <section *ngIf="usertokeninfo.username===null">
+    <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+      <ul id="cd-primary-nav" class="cd-primary-nav is-fixed">
+
+        <li>
+          <div class="input">
+            <input id="username-input" type="text" class="validate" name="username" [(ngModel)]="model.username" #username="ngModel"
+              placeholder="Email" required>
+          </div>
+          <!-- div.input -->
+        </li>
+        <li>
+          <div class="input">
+            <input id="password-input" type="password" class="validate" name="password" [(ngModel)]="model.password" #password="ngModel"
+              placeholder="Mật khẩu" required>
+
+          </div>
+          <!-- div.input -->
+          <a [routerLink]= "['/quen-mat-khau']" class="link">Quên mật khẩu?</a>
+        </li>
+        <li>
+          <button #btLogin type="submit" style="visibility:hidden"> </button>
+          <a href="javascript:;" (click)="btLogin.click()" class="btn-blue"><span>ĐĂNG NHẬP</span></a>
+        </li>
+
+      </ul>
+      <!-- primary-nav -->
+    </form>
+  </section>
+  <section *ngIf="usertokeninfo.username!=null">
+    <ul id="cd-primary-nav" class="cd-primary-nav is-fixed">
+
+			<li>
+				<div class="input search select-small">
+					<!-- <select name="" id="" class="custom-select">
+						<option value="">Mặc định</option>
+						<option value="">Chuyên mục</option>
+						<option value="">Từ khóa</option>
+						<option value="">Category</option>
+
+					</select> -->
+					<input type="text" placeholder="Tìm kiếm...." (keydown.enter)="searching($event)">
+					<a [routerLink]= "['/search']" class="search"><img src="assets/images/icon-search.png" alt="" /></a>
+
+				</div><!-- div.input -->
+			</li>
+			<li>
+				<div class="main-list-icon-head">
+					<ul>
+						<!-- <li class="nofi">
+							<a href="">
+								<div class="img"></div>
+								<span class="span">Thông báo</span>
+							</a>
+						</li> -->
+						<!-- <li class="thongbao">
+							<a href="">
+								<div class="img"></div>
+								<span class="a">03</span>
+								<span class="span">Tin nhắn</span>
+							</a>
+						</li> -->
+						<li class="tinnhan">
+							<a [routerLink]="['/news']">
+								<div class="img"></div><!-- div.img -->
+								<span class="span">Tin tức</span>
+							</a>
+						</li>
+
+						<li class="avt dropdown" >
+							<a href="" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								<img [src]="GetAvatar(usertokeninfo.username,'small')" alt="" />
+								<span class="caret"></span>
+							</a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+									<a [routerLink]="['/home-profile',usertokeninfo.username]" *ngIf="this.userType === 1">{{usertokeninfo.username}}</a>
+									<a [routerLink]="['/thong-tin-nguoi-dung',usertokeninfo.username]" *ngIf="this.userType === 0">Thông tin cá nhân</a>
+							    <a (click)="logout()" style="cursor: pointer">Đăng xuất</a>
+						  	</div>
+
+						</li><!-- li.avt -->
+
+
+					</ul>
+				</div><!-- div.main-list-icon-head -->
+			</li>
+			<li  style="min-width:100px">
+				<div class="themmoi-head" *ngIf="userType!=0">
+					<select name="create-new" id="create-new" (change)="changeGroup($event)" class="selectpicker">
+						<option value="">Thêm mới </option>
+						<option value="">Đề tài</option>
+						<option value="">Đề tài mới</option>
+						<option value="">Bài báo</option>
+					</select>
+				</div><!-- div.themmoi-head -->
+			</li>
+   </ul>
+  </section>
+
+</nav>
+<!-- cd-nav -->

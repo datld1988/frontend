@@ -1,0 +1,322 @@
+<div class="bao-all-main-content" *ngIf="this.isLoadingPage">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+
+
+        <form *ngIf="step === 1">
+          <div class="main-bg-white1">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+
+                <div class="tt-welcome">
+                  Chào mừng bạn đã tham gia cùng chúng tôi . <br> Rất cảm ơn bạn đã cung cấp thông tin chi tiết, giờ chỉ
+                  cần bước cuối cùng tạo tài khoản
+                </div>
+                <!-- div.tt-welcome -->
+
+                <div class="main-form1">
+                  <div class="main-xacnhan-reg">
+                    <div class="tt-a red" *ngIf="RegisterError">
+                      {{RegisterError}}
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Email</div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                        <input type="text" [(ngModel)]="this.userInfo.username" name="username" #username="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                          minlength="3" maxlength="50" disabled>
+
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Họ và tên</div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                        <input type="text" [(ngModel)]="this.userInfo.full_name" name="fullname" #fullname="ngModel" required disabled>
+
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s"></div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                        <a class="n-link bottom-link" (click)="changePassWord()" name="addPointMember" style="cursor: pointer">
+                                 Đổi mật khẩu
+                          </a>
+
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+
+
+                  <div class="item">
+                    <div class="trai"></div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="phai-a">
+                        <a (click)="changeInfo()" href="javascript:;" class="btn-blue to">THAY ĐỔI THÔNG TIN</a>
+                      </div>
+                      <!-- div.phai-a -->
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <!-- div.item -->
+
+                </div>
+                <!-- end main-form1 -->
+              </div>
+              <!-- div.col-md-8 col-md-offset-2 -->
+
+
+            </div>
+            <!-- div.row -->
+
+
+          </div>
+          <!-- div.main-bg-white1 -->
+        </form>
+
+        <form *ngIf="step === 2">
+          <div class="main-bg-white1">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+
+                <div class="tt-welcome">
+                  Thay đổi thông tin cá nhân.
+                </div>
+                <!-- div.tt-welcome -->
+
+                <div class="main-form1">
+                  <div class="main-xacnhan-reg">
+                    <div class="tt-a red" *ngIf="RegisterError">
+                      {{RegisterError}}
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Email</div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                        <input type="text" [(ngModel)]="this.userInfo.username" name="username" #username="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                          minlength="3" maxlength="50" disabled>
+
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Họ và tên</div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                        <input type="text" [(ngModel)]="this.userInfo.full_name" name="fullname" #fullname="ngModel" required>
+
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <!-- div.item -->
+
+
+
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s"></div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                        <a class="n-link bottom-link" (click)="changePassWord()" name="addPointMember" style="cursor: pointer">
+                               Đổi mật khẩu
+                        </a>
+
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+
+
+                  <div class="item">
+                    <div class="trai"></div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="phai-a">
+                        <a (click)="capNhatThongTin()" href="javascript:;" class="btn-blue to">CẬP NHẬT THÔNG TIN</a>
+                      </div>
+                      <!-- div.phai-a -->
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <!-- div.item -->
+
+                </div>
+                <!-- end main-form1 -->
+              </div>
+              <!-- div.col-md-8 col-md-offset-2 -->
+
+
+            </div>
+            <!-- div.row -->
+
+
+          </div>
+          <!-- div.main-bg-white1 -->
+        </form>
+
+        <form *ngIf="step === 3">
+          <div class="main-bg-white1">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+
+                <div class="tt-welcome">
+                  Thay đổi thông tin mật khẩu
+                </div>
+                <!-- div.tt-welcome -->
+
+                <div class="main-form1">
+                  <div class="main-xacnhan-reg">
+                    <div class="tt-a red" *ngIf="RegisterError">
+                      {{RegisterError}}
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Mật khẩu hiện tại</div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                        <input type="password" [(ngModel)]="this.password.oldPassword" name="username" #username="ngModel">
+
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Mật khẩu mới</div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                          <input type="password" [(ngModel)]="this.password.newPassword" name="newPassword" #newPassword="ngModel">
+
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <!-- div.item -->
+
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s">Nhập lại mật khẩu mới</div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                          <input type="password" [(ngModel)]="this.password.reNewPassword" name="reNewPassword" #reNewPassword="ngModel">
+
+                      </div>
+                      <!-- div.input -->
+                      <span class="help-block" style="color: red" *ngIf="isNotValid" >{{ this.message }}</span>
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+
+                  <div class="item">
+                    <div class="trai">
+                      <div class="tt-s"></div>
+                      <!-- div.tt -->
+                    </div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="input have_tool">
+                        <a class="n-link bottom-link" (click)="returnA()" name="addPointMember" style="cursor: pointer">
+                                     Thông tin cá nhân
+                              </a>
+
+                      </div>
+                      <!-- div.input -->
+
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+
+
+                  <div class="item">
+                    <div class="trai"></div>
+                    <!-- div.trai -->
+                    <div class="phai">
+                      <div class="phai-a">
+                        <a (click)="changePass()" href="javascript:;" class="btn-blue to">THAY ĐỔI MẬT KHẨU</a>
+                      </div>
+                      <!-- div.phai-a -->
+                    </div>
+                    <!-- div.phai -->
+                  </div>
+                  <!-- div.item -->
+
+                </div>
+                <!-- end main-form1 -->
+              </div>
+              <!-- div.col-md-8 col-md-offset-2 -->
+
+
+            </div>
+            <!-- div.row -->
+
+
+          </div>
+          <!-- div.main-bg-white1 -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

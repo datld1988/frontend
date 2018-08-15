@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="row cus-20">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="row cus-20">
+        <div class="col-md-8">
+          <div class="main-info-tiensi">
+            <div class="row cus-20">
+              <div class="col-sm-4">
+                <div class="img">
+                  <div class="inner">
+                    <img [(src)]="avatarUrl" alt="" />
+                    <div class="edit" *ngIf="isOwner" (click)="showPopup('#addFile')">
+                      <img src="assets/images/icon-edit1.png" alt="" />
+                    </div>
+
+                    <!-- div.edit -->
+                  </div>
+                  <!-- div.inner -->
+                </div>
+                <!-- div.img -->
+              </div>
+              <!-- div.col-sm-5 -->
+              <div class="col-sm-8">
+                <div class="nd">
+                  <div class="tt-a robo">
+                    {{wapUserInfo.userprofile.full_name}}
+                    <div class="song">
+                      <img src="assets/images/icon-song.png" alt="" /> {{ wapUserInfo.userprofile.point }}
+                    </div>
+                    <!-- div.song -->
+                  </div>
+                  <!-- div.tt-a -->
+                  <div class="des robo">{{wapUserInfo.academic_rankSelected.text}} - {{wapUserInfo.degreeSelected.text}}</div>
+                  <!-- div.des -->
+
+                  <div class="b robo" *ngIf="this.wapUserInfo.userprofile.isActived" >Cơ sở hoạt động</div>
+                  <div class="b robo" *ngIf="!this.wapUserInfo.userprofile.isActived" >Chưa nằm trong cơ sở nào</div>
+                  <!-- div.b -->
+                  <div class="list" *ngIf="this.wapUserInfo.userprofile.isActived">
+                    <ul>
+                      <li>
+                        - {{ wapUserInfo.groupSelected.name }}
+                        <ul>
+                          <li>+ {{ wapUserInfo.departmentSelected.name}}</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- div.list -->
+
+                  <div class="b robo">
+                    Lĩnh vực nghiên cứu:
+                    <a style="text-decoration: none" class="link">{{wapUserInfo.research_areaSelected.text}}</a>
+                  </div>
+                  <!-- div.b -->
+                  <div class="b robo">Chủ đề nghiên cứu: </div>
+                  <!-- div.b -->
+
+                  <div class="tag">
+                    <ul>
+                      <li style="margin-right:5px" *ngFor="let reachArea of wapUserInfo.research_topic"><a>{{reachArea}}</a></li>
+                    </ul>
+                  </div>
+                  <!-- div.tag -->
+                </div>
+                <!-- div.nd -->
+
+
+              </div>
+              <!-- div.col-sm-7 -->
+
+            </div>
+            <!-- div.row cus-20 -->
+
+
+          </div>
+          <!-- div.main-info-tiensi -->
+
+        </div>
+        <!-- div.col-md-7 -->
+
+        <div class="col-md-4">
+          <div class="main-new-detai">
+            <div class="tt">Tạo mới</div>
+            <!-- div.tt -->
+            <div class="sl">
+              <select name="create-new" id="create-new" (change)="changeGroup($event)">
+                    <option value="0">--Chọn--</option>    
+                    <option value="1">Đề tài</option>
+                    <option value="2">Đề tài mới</option>
+                    <option value="3">Bài báo</option>
+											</select>
+            </div>
+            <!-- div.sl -->
+
+
+          </div>
+          <!-- div.main-new-detai -->
+
+
+        </div>
+        <!-- div.col-md-5 -->
+      </div>
+      <!-- div.row cus-20 -->
+
+
+    </div>
+    <!-- div.col-md-10 col-md-offset-1 -->
+
+
+  </div>
+  <!-- div.row -->
+
+
+</div>
+<!-- div.container -->
+
+<div id="addFile" class="modal fade" role="dialog">
+  <div class="modal-dialog ">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="main-taifile" style="max-width: 517px">
+          <div class="des1">Lựa chọn file ảnh bạn muốn tải lên</div>
+
+
+          <!-- div.tt-a -->
+          <div class="des2">Hệ thống chấp nhận file: png, jpg</div>
+          <!-- div.des2 -->
+
+          <div class="custom-file-upload">
+            <!--<label for="file">File: </label>-->
+            <input type="file" id="fileUpload" (change)="changeListener($event)" name="file" />
+          </div>
+          <div class="main-btn-aqua">
+            <a style="cursor: pointer" data-dismiss="modal" class="btn-blue xam to">HỦY BỎ</a>
+            <a style="cursor: pointer" class="btn-blue to" (click)="uploadFile($event)">LƯU LẠI</a>
+          </div>
+          <!-- end main-btn-aqua -->
+        </div>
+        <!-- div.main-form2 -->
+      </div>
+
+    </div>
+    <!-- end modal-content -->
+
+  </div>
+</div>
